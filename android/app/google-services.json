@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1022035347233",
+    "project_id": "nano-inventory-aa835",
+    "storage_bucket": "nano-inventory-aa835.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022035347233:android:16bc2ad1657d9296d9e060",
+        "android_client_info": {
+          "package_name": "aj.nanoinventory.company.nano_inventory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1022035347233-5kn168v5bi9ug5t2tlkgjtml6rh5tc95.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVLlUmzwal5NOM8D-b7sx07YRW5fjlDaU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1022035347233-5kn168v5bi9ug5t2tlkgjtml6rh5tc95.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
