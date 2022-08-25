@@ -32,6 +32,7 @@ class AppTheme {
         secondaryContainer: Colors.white,
         onPrimary: Colors.black,
         primary: cPrimaryColor,
+        shadow: const Color.fromRGBO(239, 239, 239, 100),
         // header background color// header text color
         onSurface: Colors.blue,
         primaryContainer: cPrimaryContainer),
