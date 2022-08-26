@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nano_inventory/core/theme/app_theme.dart';
@@ -9,6 +10,12 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
   runApp(const MyApp());
+/*  runApp(
+    DevicePreview(
+      enabled: true,
+      builder: (context) => const MyApp(),
+    ),
+  );*/
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +29,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       getPages: RegisterPageRoute().getPages,
-     initialRoute: AppRouteName.rHome,
+     initialRoute: AppRouteName.rAddProduct,
 
     );
   }
