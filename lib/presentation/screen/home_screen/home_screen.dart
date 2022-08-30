@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
             itemCount: homeVm.mHomeCategory.length,
             itemBuilder: (_, position) {
               return GestureDetector(
-                onTap: homeVm.mHomeCategory[0]["onClick"],
+                onTap: homeVm.mHomeCategory[position]["onClick"],
                 child: Container(
                   margin: const EdgeInsets.symmetric(
                       vertical: kPadding12, horizontal: kPadding12),
