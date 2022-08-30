@@ -31,10 +31,13 @@ class ProductViewModel extends GetxController {
         isLoading.value = false;
         isError.value = false;
         message.value = "Success";
-        Get.snackbar("Success", "Success");
-        allData.value = querySnapshot.docs.map((doc) => doc.data()).toList();
+     //   Get.snackbar("Success", "Success");
+       // allData.value = querySnapshot.docs.map((doc) => doc.data()).toList();
+        mProductList.value = querySnapshot.docs.map((doc) => ProductVo.fromDocumentSnapshot(doc)).toList();
 
-        mProductList.value = productVoFromJson(jsonEncode(allData));
+
+
+       // mProductList.value = productVoFromJson(jsonEncode(allData));
         //print(mProductList);
         //  message.value = jsonEncode(allData.value).toString();
       }).onError((error, stackTrace) {
@@ -53,6 +56,11 @@ class ProductViewModel extends GetxController {
     }
   }
 
+
+  getCurrentUserId() {
+
+
+  }
   onTextFormFieldChange(String? test) {}
 
   onFieldSubmitted(String? test) {}

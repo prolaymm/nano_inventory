@@ -11,7 +11,6 @@ class AddProductViewModel extends GetxController {
   TextEditingController itemCodeTextController = TextEditingController();
   TextEditingController quantityTextController =
       TextEditingController(text: "0");
-  TextEditingController brandTextController = TextEditingController();
   TextEditingController categoryTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
   TextEditingController alertQuantityTextController =
@@ -24,6 +23,7 @@ class AddProductViewModel extends GetxController {
   RxBool isError = false.obs;
   RxString message = "".obs;
   RxBool isSuccess = false.obs;
+  ProductVo updateVo = ProductVo();
 
   ///firestore instance
   FirebaseFirestore fireStoreInstance = FirebaseFirestore.instance;
@@ -45,14 +45,20 @@ class AddProductViewModel extends GetxController {
     controller.text = count.toString();
   }
 
-  addToFireStore() async {
+  addToFireStore({required isUpdate}) async {
+
+    if(isUpdate) {
+
+      updateVo.history?.add(History(editBy: "testing",qty: 20,editDate: DateTime.now().toString(),total: 50));
+    }
+    print("update $isUpdate");
     isLoading.value = true;
     isError.value = false;
     message.value = "";
     isSuccess.value = false;
     Map<String, dynamic> data = {
       "add_by": "Arjun",
-      "created_time": "DateTime.now().toString()",
+      "created_time": DateTime.now().toString(),
       "description": descriptionTextController.text,
       "alert_count": int.parse(alertQuantityTextController.text),
       "brand": brandNameTextController.text,
@@ -60,14 +66,18 @@ class AddProductViewModel extends GetxController {
       "code": itemCodeTextController.text,
       "item_name": itemNameTextController.text,
       "office": "Mekong",
-      "qty": 20,
-      "history": [
-        {"edit_by": "@J", "qty": 30, "edit_date": "DateTime.now()", "total": 30}
-      ]
+      "qty": int.parse(quantityTextController.text),
+      "history": updateVo.history!.map((history) => {
+        "edit_by": history.editBy,
+        "qty": history.qty,
+        "edit_date": history.editDate,
+        "total": history.total,
+      }).toList()
     };
 
     try {
-      fireStoreInstance.collection("productList").add(data).then((value) {
+      var test =  isUpdate?fireStoreInstance.collection("productList").doc(updateVo.id).update(data) :   fireStoreInstance.collection("productList").add(data);
+      test.then((value) {
         isLoading.value = false;
         isError.value = false;
         isSuccess.value = true;
@@ -90,9 +100,6 @@ class AddProductViewModel extends GetxController {
     }
   }
 
-  uploadToFirebase() async {
-    addToFireStore();
-  }
 
 
 
@@ -103,7 +110,6 @@ class AddProductViewModel extends GetxController {
     itemNameTextController.text = "";
     itemCodeTextController.text = "";
     quantityTextController.text = "";
-    brandTextController.text = "";
     categoryTextController.text = "";
     descriptionTextController.text = "";
     alertQuantityTextController.text = "";
@@ -122,6 +128,20 @@ class AddProductViewModel extends GetxController {
     isLoading.value = false;
     isError.value = false;
     message.value = "";
+  }
+
+
+  updateProductInfo() {
+
+  }
+  textControllerValueForEdit(ProductVo vo) {
+    brandNameTextController.text = vo.brand??"";
+    itemNameTextController.text = vo.itemName??"";
+    itemCodeTextController.text = vo.code??"";
+    quantityTextController.text = vo.qty.toString();
+    categoryTextController.text = vo.category??"";
+    descriptionTextController.text =vo.description?? "";
+    alertQuantityTextController.text = vo.alertCount.toString();
   }
 
 }

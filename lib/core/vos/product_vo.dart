@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 List<ProductVo> productVoFromJson(String str) => List<ProductVo>.from(json.decode(str).map((x) => ProductVo.fromJson(x)));
 
 String productVoToJson(ProductVo data) => json.encode(data.toJson());
@@ -22,10 +24,12 @@ class ProductVo {
     this.itemName,
     this.office,
     this.qty,
+    this.id,
     this.history,
   });
 
   String? addBy;
+  String? id;
   String? createdTime;
   String? description;
   int? alertCount;
@@ -37,7 +41,8 @@ class ProductVo {
   int? qty;
   List<History>? history;
 
-  factory ProductVo.fromJson(Map<String, dynamic> json) => ProductVo(
+ factory ProductVo.fromJson(Map<String, dynamic> json) => ProductVo(
+
     addBy: json["add_by"],
     createdTime: json["created_time"],
     description: json["description"],
@@ -51,6 +56,21 @@ class ProductVo {
     history: List<History>.from(json["history"].map((x) => History.fromJson(x))),
   );
 
+
+  factory ProductVo.fromDocumentSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) => ProductVo(
+    id: doc.id,
+    addBy: doc.data()!["add_by"],
+    createdTime: doc.data()!["created_time"],
+    description: doc.data()!["description"],
+    alertCount: doc.data()!["alert_count"],
+    brand: doc.data()!["brand"],
+    category: doc.data()!["category"],
+    code: doc.data()!["code"],
+    itemName:doc.data()!["item_name"],
+    office: doc.data()!["office"],
+    qty: doc.data()!["qty"],
+    history: List<History>.from(doc.data()!["history"].map((x) => History.fromJson(x))),
+  );
   Map<String, dynamic> toJson() => {
     "add_by": addBy,
     "created_time": createdTime,
@@ -64,6 +84,8 @@ class ProductVo {
     "qty": qty,
     "history": List<dynamic>.from(history!.map((x) => x.toJson())),
   };
+
+
 }
 
 class History {
