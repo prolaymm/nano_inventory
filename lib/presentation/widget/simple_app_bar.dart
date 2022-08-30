@@ -23,8 +23,8 @@ class SimpleAppBar extends StatelessWidget with PreferredSizeWidget {
           ? GestureDetector(
               onTap: () => Get.back(),
               child: const SizedBox(
-                  height: 40,
-                  width: 60,
+                  height: 50,
+                  width: 70,
                   child: Icon(Icons.arrow_back_ios, size: k24Font)),
             )
           : const SizedBox(),

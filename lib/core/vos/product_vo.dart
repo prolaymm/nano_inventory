@@ -8,6 +8,8 @@ List<ProductVo> productVoFromJson(String str) => List<ProductVo>.from(json.decod
 
 String productVoToJson(ProductVo data) => json.encode(data.toJson());
 
+
+
 class ProductVo {
   ProductVo({
     this.addBy,
@@ -17,7 +19,6 @@ class ProductVo {
     this.brand,
     this.category,
     this.code,
-    this.codeIsAlert,
     this.itemName,
     this.office,
     this.qty,
@@ -31,7 +32,6 @@ class ProductVo {
   String? brand;
   String? category;
   String? code;
-  bool? codeIsAlert;
   String? itemName;
   String? office;
   int? qty;
@@ -45,7 +45,6 @@ class ProductVo {
     brand: json["brand"],
     category: json["category"],
     code: json["code"],
-    codeIsAlert: json["code_isAlert"],
     itemName: json["item_name"],
     office: json["office"],
     qty: json["qty"],
@@ -60,7 +59,6 @@ class ProductVo {
     "brand": brand,
     "category": category,
     "code": code,
-    "code_isAlert": codeIsAlert,
     "item_name": itemName,
     "office": office,
     "qty": qty,
@@ -95,3 +93,4 @@ class History {
     "total": total,
   };
 }
+

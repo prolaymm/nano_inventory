@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,11 +20,9 @@ class ProductViewModel extends GetxController {
   final collectionRef = FirebaseFirestore.instance.collection("productList");
 
   /// get data from firebase
-  Future getData() async {
+  Future getData() async {}
 
-  }
-
-  fetchDataFromFirebase() async{
+  fetchDataFromFirebase() async {
     isLoading.value = true;
     isError.value = false;
     message.value = "";
@@ -34,18 +31,18 @@ class ProductViewModel extends GetxController {
         isLoading.value = false;
         isError.value = false;
         message.value = "Success";
-        print("rror");
         Get.snackbar("Success", "Success");
-         allData.value = querySnapshot.docs.map((doc) => doc.data()).toList();
+        allData.value = querySnapshot.docs.map((doc) => doc.data()).toList();
+
         mProductList.value = productVoFromJson(jsonEncode(allData));
         //print(mProductList);
-      //  message.value = jsonEncode(allData.value).toString();
+        //  message.value = jsonEncode(allData.value).toString();
       }).onError((error, stackTrace) {
         isLoading.value = false;
         isError.value = true;
         message.value = "Fail";
         message.value = jsonEncode(allData.value).toString();
-        print("rror");
+
         Get.snackbar("$error", "erro no firenbase");
       });
     } catch (error) {
@@ -59,4 +56,6 @@ class ProductViewModel extends GetxController {
   onTextFormFieldChange(String? test) {}
 
   onFieldSubmitted(String? test) {}
+
+
 }

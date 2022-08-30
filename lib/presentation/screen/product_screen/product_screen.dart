@@ -16,10 +16,12 @@ class ProductScreen  extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productVm = Get.find<ProductViewModel>();
+
     productVm.fetchDataFromFirebase();
     return Scaffold(
       appBar: const SimpleAppBar(
         title: 'Nano Inventory Product',
+        isBack: true,
       ),
       body: RefreshIndicator(
         onRefresh: () => productVm.fetchDataFromFirebase(),
