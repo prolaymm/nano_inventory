@@ -5,6 +5,7 @@ import 'package:nano_inventory/presentation/widget/custom_text_form_field.dart';
 import 'package:nano_inventory/utils/dimens.dart';
 import 'package:nano_inventory/view_model/add_product_view_model.dart';
 
+import '../../../core/vos/Product_Vo.dart';
 import '../../widget/info_widget.dart';
 import '../../widget/simple_app_bar.dart';
 
@@ -14,6 +15,12 @@ class AddProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final addProductVm = Get.find<AddProductViewModel>();
+
+    Map<String,dynamic> argumentData =  Get.arguments??{};
+    ProductVo vo = argumentData["vo"]??ProductVo(qty: 0,alertCount: 0);
+    bool isUpdate = argumentData["isUpdate"]??false;
+    addProductVm.updateVo = vo;
+    addProductVm.textControllerValueForEdit(vo);
     addProductVm.onFailTryAgain();
     addProductVm.isSuccess.value = false;
     return Scaffold(
@@ -238,7 +245,7 @@ class AddProductScreen extends StatelessWidget {
                     title: 'Upload',
                     onClick: () {
                       if (addProductVm.formKey.currentState!.validate()) {
-                        addProductVm.uploadToFirebase();
+                        addProductVm.addToFireStore(isUpdate : isUpdate);
                       }
                     },
                     buttonColor: Theme.of(context).primaryColor,
