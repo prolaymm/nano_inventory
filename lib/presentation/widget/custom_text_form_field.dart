@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nano_inventory/presentation/widget/text_view.dart';
 import 'package:nano_inventory/utils/dimens.dart';
 
+import '../../core/validation/form_validation.dart';
+
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController textController;
   final String hintText;
@@ -11,6 +13,9 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? inputType;
  final Function(String?)? onChange;
  final bool? isMulti;
+ final TextAlign? textAlign;
+  final String? Function(String?)? validator;
+
  final Function(String?)? onFieldSubmitted;
 
   const CustomTextFormField(
@@ -19,7 +24,7 @@ class CustomTextFormField extends StatelessWidget {
       required this.hintText,
       this.suffixIcon,
       this.color,
-      this.label, this.inputType, this.onChange, this.onFieldSubmitted, this.isMulti})
+      this.label, this.inputType, this.onChange, this.onFieldSubmitted, this.isMulti, this.textAlign, this.validator})
       : super(key: key);
 
   @override
@@ -36,6 +41,7 @@ class CustomTextFormField extends StatelessWidget {
         label: TextView(
           text: label ?? "",
           fontSize: k12Font,
+          textAlign:textAlign ,
           color: Theme.of(context).hintColor,
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -52,6 +58,7 @@ class CustomTextFormField extends StatelessWidget {
             borderSide:
                 BorderSide(color: color ?? Theme.of(context).primaryColor)),
       ),
+      validator:validator??checkIsEmpty ,
     );
   }
 }
