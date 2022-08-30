@@ -8,6 +8,10 @@ class CustomTextFormField extends StatelessWidget {
   final Color? color;
   final String? label;
   final IconData? suffixIcon;
+  final TextInputType? inputType;
+ final Function(String?)? onChange;
+ final bool? isMulti;
+ final Function(String?)? onFieldSubmitted;
 
   const CustomTextFormField(
       {Key? key,
@@ -15,13 +19,15 @@ class CustomTextFormField extends StatelessWidget {
       required this.hintText,
       this.suffixIcon,
       this.color,
-      this.label})
+      this.label, this.inputType, this.onChange, this.onFieldSubmitted, this.isMulti})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: textController,
+      keyboardType: inputType,
+      maxLines: isMulti??false? 5:  1,
       style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
       decoration: InputDecoration(
         hintStyle:

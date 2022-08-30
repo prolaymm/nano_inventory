@@ -1,18 +1,27 @@
 {
   "project_info": {
     "project_number": "1022035347233",
+    "firebase_url": "https://nano-inventory-aa835-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "nano-inventory-aa835",
     "storage_bucket": "nano-inventory-aa835.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1022035347233:android:16bc2ad1657d9296d9e060",
+        "mobilesdk_app_id": "1:1022035347233:android:750e5f5fee758f38d9e060",
         "android_client_info": {
           "package_name": "aj.nanoinventory.company.nano_inventory"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1022035347233-rmk6pdlr4899ch531j3bnt51pcgf6b99.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "aj.nanoinventory.company.nano_inventory",
+            "certificate_hash": "e30143c43010d64557f680bdd3d6bf98a348b682"
+          }
+        },
         {
           "client_id": "1022035347233-5kn168v5bi9ug5t2tlkgjtml6rh5tc95.apps.googleusercontent.com",
           "client_type": 3

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nano_inventory/presentation/widget/text_view.dart';
 
-class CustomMaterialButton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final VoidCallback onClick;
   final String title;
   final Color? buttonColor;
@@ -11,7 +11,7 @@ class CustomMaterialButton extends StatelessWidget {
   final Color? borderColor;
   final double? height;
 
-  const CustomMaterialButton(
+  const CustomButton(
       {Key? key,
       required this.onClick,
       required this.title,

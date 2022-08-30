@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 import 'package:nano_inventory/presentation/route/app_route_name.dart';
 import 'package:nano_inventory/presentation/route/register_page_route.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 /*  runApp(
     DevicePreview(
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       getPages: RegisterPageRoute().getPages,
-     initialRoute: AppRouteName.rAddProduct,
+     initialRoute: AppRouteName.rHome,
 
     );
   }
