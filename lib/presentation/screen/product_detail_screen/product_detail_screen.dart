@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nano_inventory/presentation/widget/simple_app_bar.dart';
 import 'package:nano_inventory/presentation/widget/text_view.dart';
 import 'package:nano_inventory/utils/dimens.dart';
 
+import '../../../core/vos/product_vo.dart';
 import '../../widget/custom_button.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -11,6 +13,8 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String,dynamic> argumentData =  Get.arguments??{};
+    ProductVo vo = argumentData["vo"]??ProductVo(qty: 0,alertCount: 0);
     return Scaffold(
       appBar: const SimpleAppBar(
         title: 'Product Detail',
@@ -23,37 +27,28 @@ class ProductDetailScreen extends StatelessWidget {
             const SizedBox(
               height: kPadding16,
             ),
-            _rowText(context: context,hint: "Brand Name",title: "Heawei"),
+            _rowText(context: context,hint: "Brand Name",title: vo.brand??""),
             const SizedBox(
               height: kPadding16,
             ),
-            _rowText(context: context,hint: "Item Name",title: "P20 Mobile"),
+            _rowText(context: context,hint: "Item Name",title: vo.itemName??""),
             const SizedBox(
               height: kPadding16,
             ),
-            _rowText(context: context,hint: "Product Code",title: "lmt007"),
+            _rowText(context: context,hint: "Product Code",title: vo.code??""),
             const SizedBox(
               height: kPadding16,
             ),
-            _rowText(context: context,hint: "Total Item",title: "3"),
+            _rowText(context: context,hint: "Total Item",title: "${vo.qty}"),
             const SizedBox(
               height: kPadding16,
             ),
-            _rowText(context: context,hint: "Add By",title: "Arjun"),
+            _rowText(context: context,hint: "Add By",title: vo.addBy??"_"),
             const SizedBox(
               height: kPadding16,
             ),
-            const SizedBox(
-              height: kPadding16,
-            ),
-            _rowText(context: context,hint: "Created Date",title: DateTime.now().toString()),
-            const SizedBox(
-              height: kPadding16,
-            ),
-            const SizedBox(
-              height: kPadding16,
-            ),
-            _rowText(context: context,hint: "Add By",title: "Arjun"),
+            _rowText(context: context,hint: "Created Date",title:vo.createdTime??"_"),
+
             const SizedBox(
               height: 8,
             ),
@@ -64,7 +59,7 @@ class ProductDetailScreen extends StatelessWidget {
               height: 8,
             ),
            const TextView(
-              text: "Discription",
+              text: "Description",
               fontSize: k18Font,
               fontWeight: FontWeight.bold,
             ),
@@ -72,7 +67,7 @@ class ProductDetailScreen extends StatelessWidget {
               height: 8,
             ),
                TextView(
-              text: "testadad",
+              text: vo.description??"_",
               fontSize: k14Font,
               color: Theme.of(context).hintColor,
             ),
@@ -96,13 +91,13 @@ class ProductDetailScreen extends StatelessWidget {
             ListView.builder(
                 shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-                itemCount: 20,
-                itemBuilder: (_,text) {
+                itemCount: vo.history?.length,
+                itemBuilder: (_,position) {
               return Container(
 
                 padding: const EdgeInsets.all(8),
 
-                  margin: const EdgeInsets.all(4),
+                  margin: const EdgeInsets.symmetric(vertical: 4,horizontal: 4),
                   decoration: BoxDecoration(
                       color: Theme.of(context).cardColor,
                     borderRadius: BorderRadius.circular(8),
@@ -118,18 +113,18 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      _rowText(context: context,hint: "Edit By",title: "Arjun"),
+                      _rowText(context: context,hint: "Edit By",title:vo.history?[position].editBy??"_"),
                      const SizedBox(height: kPadding8,),
-                      _rowText(context: context,hint: "Date",title: "12/489/0404"),
+                      _rowText(context: context,hint: "Date",title: vo.history?[position].editDate??"_"),
                       const SizedBox(height: kPadding8,),
-                      _rowText(context: context,hint: "Item",title: "4"),
+                      _rowText(context: context,hint: "Item",title: vo.history?[position].total.toString()??""),
                     ],
                   ));
             })
           ],
         ),
       ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    /*    floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: SizedBox(
             width: 200,
             child: CustomButton(
@@ -141,7 +136,7 @@ class ProductDetailScreen extends StatelessWidget {
 
               textColor: Theme.of(context).textTheme.bodyText1!.color,
             ),
-          )
+          )*/
 
 
     );
@@ -160,7 +155,7 @@ Widget _rowText(
       ),
       TextView(
         text: title,
-        fontSize: k18Font,
+        fontSize: k16Font,
         fontWeight: FontWeight.bold,
       ),
     ],

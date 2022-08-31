@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nano_inventory/core/vos/Product_Vo.dart';
+
+import '../core/vos/product_vo.dart';
 
 class AddProductViewModel extends GetxController {
-
-
   TextEditingController brandNameTextController = TextEditingController();
   TextEditingController itemNameTextController = TextEditingController();
   TextEditingController itemCodeTextController = TextEditingController();
@@ -46,10 +45,12 @@ class AddProductViewModel extends GetxController {
   }
 
   addToFireStore({required isUpdate}) async {
-
-    if(isUpdate) {
-
-      updateVo.history?.add(History(editBy: "testing",qty: 20,editDate: DateTime.now().toString(),total: 50));
+    if (isUpdate) {
+      updateVo.history?.add(History(
+          editBy: "testing",
+          qty: 20,
+          editDate: DateTime.now().toString(),
+          total: 50));
     }
     print("update $isUpdate");
     isLoading.value = true;
@@ -67,16 +68,25 @@ class AddProductViewModel extends GetxController {
       "item_name": itemNameTextController.text,
       "office": "Mekong",
       "qty": int.parse(quantityTextController.text),
-      "history": updateVo.history == [] || updateVo.history == null? [] :  updateVo.history?.map((history) => {
-        "edit_by": history.editBy,
-        "qty": history.qty,
-        "edit_date": history.editDate,
-        "total": history.total,
-      }).toList()
+      "history": updateVo.history == [] || updateVo.history == null
+          ? []
+          : updateVo.history
+              ?.map((history) => {
+                    "edit_by": history.editBy,
+                    "qty": history.qty,
+                    "edit_date": history.editDate,
+                    "total": history.total,
+                  })
+              .toList()
     };
 
     try {
-      var test =  isUpdate?fireStoreInstance.collection("productList").doc(updateVo.id).update(data) :   fireStoreInstance.collection("productList").add(data);
+      var test = isUpdate
+          ? fireStoreInstance
+              .collection("productList")
+              .doc(updateVo.id)
+              .update(data)
+          : fireStoreInstance.collection("productList").add(data);
       test.then((value) {
         isLoading.value = false;
         isError.value = false;
@@ -100,10 +110,6 @@ class AddProductViewModel extends GetxController {
     }
   }
 
-
-
-
-
   //clear all textform field data
   clearTextControllerValue() {
     brandNameTextController.text = "";
@@ -113,7 +119,7 @@ class AddProductViewModel extends GetxController {
     categoryTextController.text = "";
     descriptionTextController.text = "";
     alertQuantityTextController.text = "";
-  /*  brandNameTextController.dispose();
+    /*  brandNameTextController.dispose();
     itemNameTextController.dispose();
     itemCodeTextController.dispose();
     quantityTextController.dispose();
@@ -121,7 +127,6 @@ class AddProductViewModel extends GetxController {
     categoryTextController.dispose();
     descriptionTextController.dispose();
     alertQuantityTextController.dispose();*/
-
   }
 
   onFailTryAgain() {
@@ -130,18 +135,15 @@ class AddProductViewModel extends GetxController {
     message.value = "";
   }
 
+  updateProductInfo() {}
 
-  updateProductInfo() {
-
-  }
   textControllerValueForEdit(ProductVo vo) {
-    brandNameTextController.text = vo.brand??"";
-    itemNameTextController.text = vo.itemName??"";
-    itemCodeTextController.text = vo.code??"";
+    brandNameTextController.text = vo.brand ?? "";
+    itemNameTextController.text = vo.itemName ?? "";
+    itemCodeTextController.text = vo.code ?? "";
     quantityTextController.text = vo.qty.toString();
-    categoryTextController.text = vo.category??"";
-    descriptionTextController.text =vo.description?? "";
+    categoryTextController.text = vo.category ?? "";
+    descriptionTextController.text = vo.description ?? "";
     alertQuantityTextController.text = vo.alertCount.toString();
   }
-
 }

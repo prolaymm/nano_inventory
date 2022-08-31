@@ -3,7 +3,10 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nano_inventory/core/vos/Product_Vo.dart';
+import 'package:nano_inventory/core/persistance/product_db.dart';
+
+import '../core/vos/product_vo.dart';
+
 
 class ProductViewModel extends GetxController {
   RxBool isLoading = false.obs;
@@ -13,6 +16,9 @@ class ProductViewModel extends GetxController {
   RxBool isTextFormFieldEmpty = true.obs;
   RxBool isSearch = false.obs;
   RxList<Map> allData = RxList();
+  final ProductDb _db = ProductDb();
+
+
 
   RxList<ProductVo> mProductList = RxList();
 
@@ -26,6 +32,7 @@ class ProductViewModel extends GetxController {
     isLoading.value = true;
     isError.value = false;
     message.value = "";
+    _db.deleteAllProduct();
     try {
       await collectionRef.get().then((querySnapshot) {
         isLoading.value = false;
@@ -34,12 +41,7 @@ class ProductViewModel extends GetxController {
      //   Get.snackbar("Success", "Success");
        // allData.value = querySnapshot.docs.map((doc) => doc.data()).toList();
         mProductList.value = querySnapshot.docs.map((doc) => ProductVo.fromDocumentSnapshot(doc)).toList();
-
-
-
-       // mProductList.value = productVoFromJson(jsonEncode(allData));
-        //print(mProductList);
-        //  message.value = jsonEncode(allData.value).toString();
+        _db.saveProductList(productList: mProductList);
       }).onError((error, stackTrace) {
         isLoading.value = false;
         isError.value = true;
