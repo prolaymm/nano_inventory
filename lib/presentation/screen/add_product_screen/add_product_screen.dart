@@ -31,12 +31,14 @@ class AddProductScreen extends StatelessWidget {
         body: Obx(
           () => addProductVm.isLoading.isTrue
               ? const Center(
-                  child: InfoWidget(
+                  child: CircularProgressIndicator()
+
+            /*InfoWidget(
                     title: "",
                     isLottie: true,
                     lottieFile: "assets/icons/lottie_loading.json",
                     isButton: false,
-                  ),
+                  ),*/
                 )
               : addProductVm.isError.isTrue
                   ? InfoWidget(

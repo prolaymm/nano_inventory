@@ -9,8 +9,8 @@ class HomeViewModel extends GetxController {
       "onClick": () => Get.toNamed(AppRouteName.rProduct)
     },
     {
-      "icon": "assets/lottes/printer.json",
-      "title": "Print",
+      "icon": "assets/icons/add_product.json",
+      "title": "Add Product",
       "onClick": () => Get.toNamed(AppRouteName.rAddProduct)
     },
     {
