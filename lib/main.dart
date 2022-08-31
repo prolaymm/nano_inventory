@@ -5,10 +5,14 @@ import 'package:nano_inventory/core/theme/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:nano_inventory/presentation/route/app_route_name.dart';
 import 'package:nano_inventory/presentation/route/register_page_route.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'core/helper/hive_helper.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await Hive.initFlutter();
+  await HiveHelper().openBox();
   runApp(const MyApp());
 /*  runApp(
     DevicePreview(

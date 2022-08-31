@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nano_inventory/core/vos/product_vo.dart';
+import 'package:nano_inventory/presentation/widget/product_container.dart';
 import 'package:nano_inventory/view_model/product_view_model.dart';
 
 import '../../../utils/dimens.dart';
@@ -16,8 +17,6 @@ class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productVm = Get.find<ProductViewModel>();
-
-
 
     productVm.fetchDataFromFirebase();
     return Scaffold(
@@ -58,19 +57,18 @@ class ProductScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: kPadding16),
-                              child: Obx(
-                                () => CustomTextFormField(
-                                  textController:
-                                      productVm.searchTextController,
+                              child: GestureDetector(
+                                onTap:()=>  Get.toNamed(AppRouteName.rSearch),
+                                child: CustomTextFormField(
+
+                                  isEnable: false,
+                                  textController: productVm.searchTextController,
                                   hintText: "Search",
-                                  /*  onSuffixIconClick: (){
-                      productVm.textController.text = "";
-                      productVm.isTextFormFieldEmpty.value = true;
-                    },*/
-                                  suffixIcon:
-                                      productVm.isTextFormFieldEmpty.isTrue
-                                          ? Icons.search
-                                          : Icons.clear,
+                                  label: "Search",
+                                  suffixIcon: Icon(
+                                    Icons.search,
+                                    color: Theme.of(context).hintColor,
+                                  ),
                                   onChange: productVm.onTextFormFieldChange,
                                   onFieldSubmitted: productVm.onFieldSubmitted,
                                 ),
@@ -81,128 +79,15 @@ class ProductScreen extends StatelessWidget {
                                   itemCount: productVm.mProductList.length,
                                   itemBuilder: (_, position) {
                                     return GestureDetector(
-                                      onTap: ()=> print(productVm.mProductList[position].id),
-                                      child: Container(
-                                        height: 120,
-                                        margin: const EdgeInsets.only(
-                                            top: 8,
-                                            bottom: 6,
-                                            left: kPadding16,
-                                            right: kPadding16),
-                                        padding:
-                                            const EdgeInsets.all(kPadding12),
-                                        decoration: BoxDecoration(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primaryContainer,
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .shadow,
-                                                spreadRadius: 4,
-                                                blurRadius: 4,
-                                              )
-                                            ]),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                TextView(
-                                                  text: productVm
-                                                          .mProductList[
-                                                              position]
-                                                          .itemName ??
-                                                      "",
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: k16Font,
-                                                ),
-                                                TextView(
-                                                  text: productVm
-                                                          .mProductList[
-                                                              position]
-                                                          .createdTime ??
-                                                      '',
-                                                  color: Theme.of(context)
-                                                      .hintColor,
-                                                  fontSize: 10,
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 6,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                TextView(
-                                                  text: productVm
-                                                          .mProductList[
-                                                              position]
-                                                          .code ??
-                                                      "",
-                                                  color: Theme.of(context)
-                                                      .hintColor,
-                                                  fontSize: k14Font,
-                                                ),
-                                                GestureDetector(
-                                                    onTap: () =>Get.toNamed(AppRouteName.rAddProduct,
-                                                        arguments: {
-                                                              "vo" : productVm
-                                                                      .mProductList[
-                                                                  position],
-                                                          "isUpdate" :     true
-                                                            }),
-                                                    child: Icon(
-                                                      Icons.edit,
-                                                      color: Theme.of(context)
-                                                          .errorColor,
-                                                      size: 18,
-                                                    ))
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 6,
-                                            ),
-                                            TextView(
-                                              text: productVm
-                                                      .mProductList[position]
-                                                      .brand ??
-                                                  "",
-                                              color: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText2!
-                                                  .color,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: k14Font,
-                                            ),
-                                            const SizedBox(
-                                              height: 6,
-                                            ),
-                                            TextView(
-                                              text:"${ productVm.mProductList[position].qty} Items",
-                                              color: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyText2!
-                                                  .color,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: k14Font,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
+                                        onTap: () => Get.toNamed(
+                                                AppRouteName.rProductDetail,
+                                                arguments: {
+                                                  "vo": productVm
+                                                      .mProductList[position],
+                                                }),
+                                        child: ProductContainer(
+                                          vo: productVm.mProductList[position],
+                                        ));
                                   }),
                             ),
                           ],
