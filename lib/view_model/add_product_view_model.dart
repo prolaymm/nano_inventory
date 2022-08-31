@@ -67,7 +67,7 @@ class AddProductViewModel extends GetxController {
       "item_name": itemNameTextController.text,
       "office": "Mekong",
       "qty": int.parse(quantityTextController.text),
-      "history": updateVo.history!.map((history) => {
+      "history": updateVo.history == [] || updateVo.history == null? [] :  updateVo.history?.map((history) => {
         "edit_by": history.editBy,
         "qty": history.qty,
         "edit_date": history.editDate,
