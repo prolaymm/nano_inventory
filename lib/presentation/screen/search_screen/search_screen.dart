@@ -33,8 +33,10 @@ class SearchScreen extends StatelessWidget {
                 horizontal: kPadding16),
             child: CustomTextFormField(
 
+              autoFocus: true,
               textController: searchVm.searchTextController,
               hintText: "Search",
+
               label: "Search",
               suffixIcon: Obx(
                 ()=> searchVm.isSearch.isTrue? GestureDetector(

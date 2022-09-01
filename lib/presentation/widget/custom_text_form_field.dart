@@ -15,6 +15,7 @@ class CustomTextFormField extends StatelessWidget {
  final bool? isMulti;
  final TextAlign? textAlign;
  final bool? isEnable;
+ final bool? autoFocus;
   final String? Function(String?)? validator;
 
   final VoidCallback? onClick;
@@ -27,13 +28,14 @@ class CustomTextFormField extends StatelessWidget {
       required this.hintText,
       this.suffixIcon,
       this.color,
-      this.label, this.inputType, this.onChange, this.onFieldSubmitted, this.isMulti, this.textAlign, this.validator, this.isEnable, this.onClick})
+      this.label, this.inputType, this.onChange, this.onFieldSubmitted, this.isMulti, this.textAlign, this.validator, this.isEnable, this.onClick, this.autoFocus})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       onTap: onClick,
+      autofocus: autoFocus??false,
       controller: textController,
       keyboardType: inputType,
       enabled: isEnable??true,

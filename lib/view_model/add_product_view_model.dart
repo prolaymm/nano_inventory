@@ -115,10 +115,10 @@ class AddProductViewModel extends GetxController {
     brandNameTextController.text = "";
     itemNameTextController.text = "";
     itemCodeTextController.text = "";
-    quantityTextController.text = "";
+    quantityTextController.text = "0";
     categoryTextController.text = "";
     descriptionTextController.text = "";
-    alertQuantityTextController.text = "";
+    alertQuantityTextController.text = "0";
     /*  brandNameTextController.dispose();
     itemNameTextController.dispose();
     itemCodeTextController.dispose();
