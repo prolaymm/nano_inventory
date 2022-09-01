@@ -10,6 +10,7 @@ class AppTheme {
     hintColor: const Color(0xffACACAC),
     scaffoldBackgroundColor: cScaffoldBackground,
     backgroundColor: Colors.white,
+    cardColor: Colors.white,
     shadowColor: const Color.fromRGBO(241, 241, 241, 100),
     appBarTheme: const AppBarTheme(
       color: Colors.white,

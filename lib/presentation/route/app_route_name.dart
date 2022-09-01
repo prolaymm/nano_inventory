@@ -6,4 +6,5 @@ class AppRouteName {
   static const String rProduct = "/product";
   static const String rProductDetail = "/product-detail";
   static const String rSearch = "/search";
+  static const String rCategory = "/category";
 }
