@@ -18,6 +18,13 @@ class CategoryViewModel extends GetxController {
   RxBool isSuccess = false.obs;
   RxList<Map<String,dynamic>> mCategoryList = RxList();
 
+
+  /// company list
+
+
+
+
+
   ///firestore instance
   FirebaseFirestore fireStoreInstance = FirebaseFirestore.instance;
 
@@ -30,7 +37,7 @@ class CategoryViewModel extends GetxController {
 
 
     try {
-      var dataAdd = fireStoreInstance.collection("category").add({"user_name": categoryTextController.text});
+      var dataAdd = fireStoreInstance.collection("category").add({"type": categoryTextController.text});
       dataAdd.then((value) {
         isLoading.value = false;
         isError.value = false;
@@ -66,6 +73,7 @@ class CategoryViewModel extends GetxController {
     isError.value = false;
     message.value = "";
   }
+
 
   updateProductInfo() {}
 
