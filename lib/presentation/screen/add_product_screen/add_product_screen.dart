@@ -1,12 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nano_inventory/core/vos/drop_down_vo.dart';
+import 'package:nano_inventory/presentation/screen/add_product_screen/category_drop_down.dart';
 import 'package:nano_inventory/presentation/widget/custom_button.dart';
+import 'package:nano_inventory/presentation/widget/custom_drop_down_button.dart';
 import 'package:nano_inventory/presentation/widget/custom_text_form_field.dart';
+import 'package:nano_inventory/presentation/widget/text_view.dart';
 import 'package:nano_inventory/utils/dimens.dart';
 import 'package:nano_inventory/view_model/add_product_view_model.dart';
 import '../../../core/vos/product_vo.dart';
 import '../../widget/info_widget.dart';
 import '../../widget/simple_app_bar.dart';
+import 'company_drop_down.dart';
 
 class AddProductScreen extends StatelessWidget {
   const AddProductScreen({Key? key}) : super(key: key);
@@ -103,14 +109,17 @@ class AddProductScreen extends StatelessWidget {
                                 const SizedBox(
                                   height: kPadding18,
                                 ),
-                                SizedBox(
+                             /*   SizedBox(
                                     height: 45,
                                     child: CustomTextFormField(
                                       textController:
                                           addProductVm.categoryTextController,
                                       hintText: "Category",
                                       label: "Category",
-                                    )),
+                                    )),*/
+
+                                CompanyDropDown(addProductVm : addProductVm),
+
                                 const SizedBox(
                                   height: kPadding18,
                                 ),
@@ -141,8 +150,8 @@ class AddProductScreen extends StatelessWidget {
                                                 .quantityTextController,
                                             inputType: TextInputType.number,
                                             textAlign: TextAlign.center,
-                                            hintText: "Alert Quantity",
-                                            label: "Alert Quantity",
+                                            hintText: "Quantity",
+                                            label: "Quantity",
                                           )),
                                     ),
                                     Expanded(

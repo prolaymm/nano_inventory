@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nano_inventory/core/vos/drop_down_vo.dart';
 
 import '../core/vos/product_vo.dart';
 
@@ -15,6 +16,12 @@ class AddProductViewModel extends GetxController {
   TextEditingController alertQuantityTextController =
       TextEditingController(text: "0");
 
+  ///category drop down
+  Rx<DropDownVo> dropDownCategoryValue = DropDownVo().obs;
+  RxBool isDropDownCategoryNull = false.obs;
+  Rx nullCategoryDropDown = null.obs;
+
+  ///form key
   GlobalKey<FormState> formKey = GlobalKey();
 
   ///this is for error and loading
@@ -23,6 +30,29 @@ class AddProductViewModel extends GetxController {
   RxString message = "".obs;
   RxBool isSuccess = false.obs;
   ProductVo updateVo = ProductVo();
+
+  ///drop down for company list
+  RxList<DropDownVo> companyList = RxList([
+    DropDownVo(
+      id: "1",
+      title: 'NanoLabs',
+    ),
+    DropDownVo(
+      id: "2",
+      title: 'LMT',
+    ),
+    DropDownVo(
+      id: "3",
+      title: 'MEKONG',
+    ),
+    DropDownVo(
+      id: "4",
+      title: 'Smart Tech',
+    ),
+  ]);
+  Rx<DropDownVo> dropDownCompanyValue = DropDownVo().obs;
+  RxBool isDropDownCompanyNull = false.obs;
+  Rx nullCompanyDropDown = null.obs;
 
   ///firestore instance
   FirebaseFirestore fireStoreInstance = FirebaseFirestore.instance;
@@ -145,5 +175,18 @@ class AddProductViewModel extends GetxController {
     categoryTextController.text = vo.category ?? "";
     descriptionTextController.text = vo.description ?? "";
     alertQuantityTextController.text = vo.alertCount.toString();
+  }
+
+  onDropDownChange({required DropDownVo value, bool? isCompany}) {
+    dropDownCompanyValue.value = value;
+    isDropDownCompanyNull.value = true;
+    if (isCompany == true) {
+  //    dropDownCategoryValue.value = value;
+     // isDropDownCategoryNull.value = true;
+      print(value.title);
+    } else {
+      dropDownCategoryValue.value = value;
+      isDropDownCategoryNull.value = true;
+    }
   }
 }

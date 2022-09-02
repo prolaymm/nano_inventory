@@ -21,12 +21,15 @@ class CategoryScreen extends StatelessWidget {
         stream: FirebaseFirestore.instance.collection('category').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+
+
             return ListView.builder(
+
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot doc = snapshot.data!.docs[index];
 
-                  print(doc);
+
                   return Container(
                       padding: const EdgeInsets.all(kPadding16),
                       margin: const EdgeInsets.symmetric(
@@ -53,7 +56,7 @@ class CategoryScreen extends StatelessWidget {
                             width: kPadding8,
                           ),
                           TextView(
-                            text: doc["user_name"] ?? "",
+                            text: doc["type"] ?? "",
                             fontSize: kPadding16,
                             fontWeight: FontWeight.bold,
                           )
