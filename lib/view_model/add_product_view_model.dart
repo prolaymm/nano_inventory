@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nano_inventory/core/vos/drop_down_vo.dart';
 
+import '../core/service/persistence_service.dart';
 import '../core/vos/product_vo.dart';
 
 class AddProductViewModel extends GetxController {
@@ -20,6 +21,11 @@ class AddProductViewModel extends GetxController {
   Rx<DropDownVo> dropDownCategoryValue = DropDownVo().obs;
   RxBool isDropDownCategoryNull = false.obs;
   Rx nullCategoryDropDown = null.obs;
+
+  ///user data from persistance
+  final persistenceService = Get.find<PersistenceService>();
+  Map? mUserData;
+
 
   ///form key
   GlobalKey<FormState> formKey = GlobalKey();
@@ -77,18 +83,18 @@ class AddProductViewModel extends GetxController {
   addToFireStore({required isUpdate}) async {
     if (isUpdate) {
       updateVo.history?.add(History(
-          editBy: "testing",
+          editBy: mUserData!["user_name"],
           qty: 20,
           editDate: DateTime.now().toString(),
           total: 50));
     }
-    print("update $isUpdate");
+
     isLoading.value = true;
     isError.value = false;
     message.value = "";
     isSuccess.value = false;
     Map<String, dynamic> data = {
-      "add_by": "Arjun",
+      "add_by": mUserData!["user_name"],
       "created_time": DateTime.now().toString(),
       "description": descriptionTextController.text,
       "alert_count": int.parse(alertQuantityTextController.text),
@@ -102,7 +108,7 @@ class AddProductViewModel extends GetxController {
           ? []
           : updateVo.history
               ?.map((history) => {
-                    "edit_by": history.editBy,
+                    "edit_by": mUserData!["user_name"],
                     "qty": history.qty,
                     "edit_date": history.editDate,
                     "total": history.total,
@@ -183,7 +189,7 @@ class AddProductViewModel extends GetxController {
     if (isCompany == true) {
   //    dropDownCategoryValue.value = value;
      // isDropDownCategoryNull.value = true;
-      print(value.title);
+
     } else {
       dropDownCategoryValue.value = value;
       isDropDownCategoryNull.value = true;

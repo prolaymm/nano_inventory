@@ -20,20 +20,18 @@ class CategoryDropDown extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<DropDownVo> categoryList = [];
-          List<DropDownVo> test = [
-            DropDownVo(id: "1", title: "test"),
-          ];
+
 
           for (int i = 0; i < snapshot.data!.docs.length; i++) {
             DocumentSnapshot doc = snapshot.data!.docs[i];
-            print(doc["type"]);
+
             categoryList.add(DropDownVo(title: doc["type"]));
           }
 
           return Obx(
             () => CustomDropDownButton(
               hintText: "Select Category",
-              dropDownList: [],
+              dropDownList: const [],
               value: addProductVm.isDropDownCategoryNull.isTrue
                   ? addProductVm.nullCategoryDropDown.value
                   : addProductVm.dropDownCategoryValue.value,

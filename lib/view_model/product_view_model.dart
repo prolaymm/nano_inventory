@@ -46,7 +46,7 @@ class ProductViewModel extends GetxController {
         isLoading.value = false;
         isError.value = true;
         message.value = "Fail";
-        message.value = jsonEncode(allData.value).toString();
+        message.value = jsonEncode(allData).toString();
 
         Get.snackbar("$error", "erro no firenbase");
       });

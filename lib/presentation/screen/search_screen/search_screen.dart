@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:nano_inventory/view_model/search_view_model.dart';
 
 import '../../../utils/dimens.dart';

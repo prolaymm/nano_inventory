@@ -1,12 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nano_inventory/core/vos/drop_down_vo.dart';
-import 'package:nano_inventory/presentation/screen/add_product_screen/category_drop_down.dart';
 import 'package:nano_inventory/presentation/widget/custom_button.dart';
-import 'package:nano_inventory/presentation/widget/custom_drop_down_button.dart';
 import 'package:nano_inventory/presentation/widget/custom_text_form_field.dart';
-import 'package:nano_inventory/presentation/widget/text_view.dart';
 import 'package:nano_inventory/utils/dimens.dart';
 import 'package:nano_inventory/view_model/add_product_view_model.dart';
 import '../../../core/vos/product_vo.dart';
@@ -27,6 +22,7 @@ class AddProductScreen extends StatelessWidget {
     addProductVm.updateVo = vo;
     addProductVm.textControllerValueForEdit(vo);
     addProductVm.onFailTryAgain();
+    addProductVm.mUserData = addProductVm.persistenceService.secureData;
     addProductVm.isSuccess.value = false;
     return Scaffold(
         appBar: const SimpleAppBar(

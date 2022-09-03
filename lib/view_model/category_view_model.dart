@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../core/vos/product_vo.dart';
 
 class CategoryViewModel extends GetxController {
 
@@ -42,7 +41,7 @@ class CategoryViewModel extends GetxController {
         isLoading.value = false;
         isError.value = false;
 
-        print(value.firestore);
+
         isSuccess.value = true;
         message.value = "Success";
         Get.snackbar("Success", "");
