@@ -14,7 +14,6 @@ class SearchViewModel extends GetxController {
   getProductList() {
     isSearch.value = false;
     searchTextController.text = "";
-    print("getting");
     mProductList.clear();
     mProductList.value = _db.getAllProduct();
     mProductList.refresh();

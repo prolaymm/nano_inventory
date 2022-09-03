@@ -6,6 +6,8 @@ class TextView extends StatelessWidget {
   final TextAlign? textAlign;
   final Color? color;
   final int? maxLine;
+  final double? letterSpacing;
+  final FontStyle? fontStyle;
   final FontWeight? fontWeight;
 
   final TextOverflow? textOverflow;
@@ -16,7 +18,7 @@ class TextView extends StatelessWidget {
       this.fontSize,
       this.textAlign,
       this.color,
-      this.textOverflow, this.fontWeight, this.maxLine})
+      this.textOverflow, this.fontWeight, this.maxLine, this.letterSpacing, this.fontStyle})
       : super(key: key);
 
   @override
@@ -24,6 +26,8 @@ class TextView extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(color: color??Theme.of(context).textTheme.bodyText2?.color!,
+          letterSpacing: letterSpacing,
+          fontStyle: fontStyle,
           fontWeight: fontWeight, fontSize: fontSize),
       textAlign: textAlign,
       maxLines: maxLine,

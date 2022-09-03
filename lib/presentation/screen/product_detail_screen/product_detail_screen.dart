@@ -6,7 +6,7 @@ import 'package:nano_inventory/presentation/widget/text_view.dart';
 import 'package:nano_inventory/utils/dimens.dart';
 
 import '../../../core/vos/product_vo.dart';
-import '../../widget/custom_button.dart';
+
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({Key? key}) : super(key: key);

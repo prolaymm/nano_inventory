@@ -6,10 +6,11 @@ class AppTheme {
   AppTheme._();
 
   static final ThemeData lightTheme = ThemeData(
-    primaryColor: cPrimaryColor,
+    primaryColor:  cPrimaryColor,
     hintColor: const Color(0xffACACAC),
     scaffoldBackgroundColor: cScaffoldBackground,
     backgroundColor: Colors.white,
+    errorColor: Colors.red,
     cardColor: Colors.white,
     shadowColor: const Color.fromRGBO(241, 241, 241, 100),
     appBarTheme: const AppBarTheme(
@@ -32,6 +33,7 @@ class AppTheme {
         //  secondary: primaryColor,
         secondaryContainer: Colors.white,
         onPrimary: Colors.black,
+        error: Colors.red,
         primary: cPrimaryColor,
         shadow: const Color.fromRGBO(239, 239, 239, 100),
         // header background color// header text color

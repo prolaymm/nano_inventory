@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nano_inventory/core/vos/product_vo.dart';
 import 'package:nano_inventory/presentation/widget/product_container.dart';
 import 'package:nano_inventory/view_model/product_view_model.dart';
 
@@ -9,7 +8,6 @@ import '../../route/app_route_name.dart';
 import '../../widget/custom_text_form_field.dart';
 import '../../widget/info_widget.dart';
 import '../../widget/simple_app_bar.dart';
-import '../../widget/text_view.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({Key? key}) : super(key: key);

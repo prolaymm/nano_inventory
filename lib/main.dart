@@ -1,6 +1,6 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:nano_inventory/core/service/persistence_service.dart';
 import 'package:nano_inventory/core/theme/app_theme.dart';
 import 'package:get/get.dart';
 import 'package:nano_inventory/presentation/route/app_route_name.dart';
@@ -13,7 +13,11 @@ void main() async{
   await Firebase.initializeApp();
   await Hive.initFlutter();
   await HiveHelper().openBox();
-  runApp(const MyApp());
+   PersistenceService localStorageService = Get.put(PersistenceService());
+
+   await localStorageService.readToken();
+
+  runApp( MyApp(authValue: localStorageService.secureData,));
 /*  runApp(
     DevicePreview(
       enabled: true,
@@ -23,7 +27,9 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+
+  final Map? authValue;
+  const MyApp({Key? key, this.authValue}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -31,9 +37,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
+      theme:  AppTheme.lightTheme,
       getPages: RegisterPageRoute().getPages,
-     initialRoute: AppRouteName.rAddProduct,
+     initialRoute:authValue!["token"]==""? AppRouteName.rLogin : AppRouteName.rHome,
 
     );
   }
