@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nano_inventory/presentation/screen/add_product_screen/category_lists.dart';
 import 'package:nano_inventory/presentation/widget/custom_button.dart';
 import 'package:nano_inventory/presentation/widget/custom_text_form_field.dart';
 import 'package:nano_inventory/utils/dimens.dart';
 import 'package:nano_inventory/view_model/add_product_view_model.dart';
 import '../../../core/vos/product_vo.dart';
 import '../../widget/info_widget.dart';
+import '../../widget/quick_betting_bottom_sheet.dart';
 import '../../widget/simple_app_bar.dart';
+import 'category_drop_down.dart';
 import 'company_drop_down.dart';
 
 class AddProductScreen extends StatelessWidget {
@@ -115,7 +118,10 @@ class AddProductScreen extends StatelessWidget {
                                     )),*/
 
                                 CompanyDropDown(addProductVm : addProductVm),
-
+                                const SizedBox(
+                                  height: kPadding18,
+                                ),
+                                CategoryDropDown(addProductVm: addProductVm),
                                 const SizedBox(
                                   height: kPadding18,
                                 ),

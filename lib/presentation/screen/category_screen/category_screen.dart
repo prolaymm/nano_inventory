@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nano_inventory/core/persistance/category_db.dart';
+import 'package:nano_inventory/core/vos/category_vo.dart';
 import 'package:nano_inventory/presentation/widget/text_view.dart';
 import 'package:nano_inventory/utils/dimens.dart';
 import 'package:nano_inventory/view_model/category_view_model.dart';
@@ -15,23 +17,24 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categoryVm = Get.find<CategoryViewModel>();
+
+    print(CategoryDb().getAllCategory());
     return Scaffold(
       appBar: const SimpleAppBar(title: 'Category', isBack: true),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('category').snapshots(),
-
         builder: (context, snapshot) {
           if (snapshot.hasData) {
 
-
-            Map<String,dynamic> data = {};
+            print(CategoryDb().getAllCategory());
             return ListView.builder(
-
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot doc = snapshot.data!.docs[index];
 
 
+                CategoryDb().saveCategory(
+                      category: CategoryVo(id: doc.id, title: doc["type"]));
                   return Container(
                       padding: const EdgeInsets.all(kPadding16),
                       margin: const EdgeInsets.symmetric(

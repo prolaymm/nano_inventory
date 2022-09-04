@@ -1,11 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nano_inventory/core/vos/drop_down_vo.dart';
+import 'package:nano_inventory/presentation/route/app_route_name.dart';
+import 'package:nano_inventory/utils/dimens.dart';
 import 'package:nano_inventory/view_model/add_product_view_model.dart';
 
-import '../../widget/custom_drop_down_button.dart';
+import '../../widget/custom_button.dart';
+import '../../widget/custom_text_form_field.dart';
+import '../../widget/quick_betting_bottom_sheet.dart';
 import '../../widget/text_view.dart';
+import 'category_lists.dart';
 
 class CategoryDropDown extends StatelessWidget {
   final AddProductViewModel addProductVm;
@@ -15,38 +19,53 @@ class CategoryDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('category').snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          List<DropDownVo> categoryList = [];
-
-
-          for (int i = 0; i < snapshot.data!.docs.length; i++) {
-            DocumentSnapshot doc = snapshot.data!.docs[i];
-
-            categoryList.add(DropDownVo(title: doc["type"]));
-          }
-
-          return Obx(
-            () => CustomDropDownButton(
-              hintText: "Select Category",
-              dropDownList: const [],
-              value: addProductVm.isDropDownCategoryNull.isTrue
-                  ? addProductVm.nullCategoryDropDown.value
-                  : addProductVm.dropDownCategoryValue.value,
-
-              //  onChanged:addProductVm.onDropDownChange(),
-              isSelected: addProductVm.nullCategoryDropDown.value,
+    return  GestureDetector(
+      onTap: ()=> quickBettingBottomSheet(child:
+      Column(
+        children: [
+          const SizedBox(height: kPadding8,),
+          Padding(
+            padding: const EdgeInsets.symmetric( horizontal: kPadding8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const TextView(text: "Please Select Category",fontSize: k18Font,fontWeight: FontWeight.bold,),
+                GestureDetector(
+                  onTap: ()=> Get.back(),
+                  child: SizedBox(
+                      height: 40,width: 50,
+                      child: Icon(Icons.close_rounded,color: Theme.of(context).errorColor,)),
+                )
+              ],
             ),
-          );
-        }
-        if (snapshot.hasError) {
-          return const TextView(text: "Error on Category");
-        } else {
-          return const TextView(text: "No Category Found");
-        }
-      },
+          ),
+          const SizedBox(height: kPadding12,),
+          Flexible(child: CategoryList(addProductVm: addProductVm,)),
+          const SizedBox(height: kPadding8,),
+          SizedBox(
+            width: 200,
+            child: CustomButton(
+              title: 'Add Category',
+              onClick: () => Get.toNamed(AppRouteName.rCategory),
+              buttonColor: Theme.of(context).errorColor,
+              textColor: Theme.of(context).textTheme.bodyText1!.color,
+            ),
+          )
+        ],
+      ),
+
+          context: context, height: Get.height/1.4),
+      child: SizedBox(
+          height: 45,
+          child: CustomTextFormField(
+            isEnable: false,
+            textController:
+            addProductVm.categoryTextController,
+            hintText: "Category",
+            label: "Category",
+          )
+      ),
     );
+
   }
 }

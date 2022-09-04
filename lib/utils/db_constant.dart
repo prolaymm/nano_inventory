@@ -7,5 +7,5 @@ const String hiveHistoryBox = "HISTORY_BOX";
 const int hiveHistoryId =2 ;
 
 ///category db
-const int hiveCategory = 1;
+const int hiveCategoryId = 3;
 const String hiveCategoryBox = "CATEGORY_BOX";
