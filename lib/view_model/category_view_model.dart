@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nano_inventory/core/vos/category_vo.dart';
 
 
 class CategoryViewModel extends GetxController {
@@ -78,3 +79,4 @@ class CategoryViewModel extends GetxController {
 
 
 }
+
