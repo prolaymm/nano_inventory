@@ -19,10 +19,12 @@ class CategoryScreen extends StatelessWidget {
       appBar: const SimpleAppBar(title: 'Category', isBack: true),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('category').snapshots(),
+
         builder: (context, snapshot) {
           if (snapshot.hasData) {
 
 
+            Map<String,dynamic> data = {};
             return ListView.builder(
 
                 itemCount: snapshot.data!.docs.length,

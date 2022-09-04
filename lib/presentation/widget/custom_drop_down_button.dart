@@ -8,7 +8,7 @@ import 'text_view.dart';
 class CustomDropDownButton extends StatelessWidget {
   final String hintText;
   final DropDownVo? value;
-  final bool isSelected;
+  final bool? isSelected;
   final Function(DropDownVo?)? onChanged;
   final List<DropDownVo> dropDownList;
 

@@ -183,8 +183,8 @@ class AddProductViewModel extends GetxController {
     alertQuantityTextController.text = vo.alertCount.toString();
   }
 
-  onDropDownChange({required DropDownVo value, bool? isCompany}) {
-    dropDownCompanyValue.value = value;
+  onDropDownChange({ DropDownVo? value, bool? isCompany}) {
+    dropDownCompanyValue.value = value!;
     isDropDownCompanyNull.value = true;
     if (isCompany == true) {
   //    dropDownCategoryValue.value = value;

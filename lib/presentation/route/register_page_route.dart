@@ -16,6 +16,7 @@ import 'package:nano_inventory/presentation/screen/search_screen/search_screen.d
 
 import '../../di/login_binding.dart';
 import '../screen/auth_screens/login_screen/login_screen.dart';
+import '../screen/test_screen/drop_down_test/drop_down_test.dart';
 
 
 class RegisterPageRoute {
@@ -29,5 +30,7 @@ class RegisterPageRoute {
     GetPage(name: AppRouteName.rCategory, page: ()=> const CategoryScreen(),binding: CategoryBinding()),
     GetPage(name: AppRouteName.rLogin, page: ()=> const LoginScreen(),binding: LoginBinding()),
     GetPage(name: AppRouteName.rUpdateUserInfo, page: ()=> const UpdateUserInfoScreen(),binding: LoginBinding()),
+    GetPage(name: AppRouteName.rTest, page: ()=> const DropDownTest(),binding: AddProductBinding()),
+
   ];
 }
