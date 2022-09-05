@@ -17,6 +17,7 @@ class AddProductViewModel extends GetxController {
       TextEditingController(text: "0");
   TextEditingController categoryTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
+  TextEditingController companyTextController = TextEditingController();
   TextEditingController alertQuantityTextController =
       TextEditingController(text: "0");
 
@@ -109,6 +110,7 @@ class AddProductViewModel extends GetxController {
 
   addToFireStore({required isUpdate}) async {
     if (isUpdate) {
+
       updateVo.history?.add(History(
           editBy: mUserData!["user_name"],
           qty: 20,

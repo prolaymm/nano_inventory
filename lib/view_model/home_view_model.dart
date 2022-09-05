@@ -18,10 +18,10 @@ class HomeViewModel extends GetxController {
       "title": "Category",
       "onClick": () => Get.toNamed(AppRouteName.rCategory)
     },
-   /* {
+    {
       "icon": "assets/lottes/stock.json",
       "title": "Stock",
-      "onClick": () => print("hello world")
-    },*/
+      "onClick": () => Get.toNamed(AppRouteName.rStockLeft)
+    },
   ];
 }

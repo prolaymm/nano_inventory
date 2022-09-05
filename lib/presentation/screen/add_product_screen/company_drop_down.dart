@@ -15,12 +15,13 @@ class CompanyDropDown extends StatelessWidget {
     return GetBuilder<AddProductViewModel>(
       builder: (controller) {
         return CustomDropDownButton(
-            hintText: "Select Conpany",
+            hintText: "Select Company",
             dropDownList: controller.testVo,
             isSelected: true,
             value: controller.officeDropDown,
             onChanged: (DropDownVo? newServer) {
               print(newServer);
+              controller.companyTextController.text = newServer!.title!;
               controller.onDropDownChange(newServer);
             });
       },

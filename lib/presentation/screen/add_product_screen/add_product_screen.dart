@@ -5,6 +5,7 @@ import 'package:nano_inventory/presentation/widget/custom_button.dart';
 import 'package:nano_inventory/presentation/widget/custom_text_form_field.dart';
 import 'package:nano_inventory/utils/dimens.dart';
 import 'package:nano_inventory/view_model/add_product_view_model.dart';
+import '../../../core/vos/drop_down_vo.dart';
 import '../../../core/vos/product_vo.dart';
 import '../../widget/info_widget.dart';
 import '../../widget/quick_betting_bottom_sheet.dart';
@@ -25,6 +26,7 @@ class AddProductScreen extends StatelessWidget {
     addProductVm.updateVo = vo;
     addProductVm.textControllerValueForEdit(vo);
     addProductVm.onFailTryAgain();
+    addProductVm.companyTextController.text = vo.category??"";
     addProductVm.mUserData = addProductVm.persistenceService.secureData;
     addProductVm.isSuccess.value = false;
     return Scaffold(
@@ -55,7 +57,7 @@ class AddProductScreen extends StatelessWidget {
                       onClick: () => addProductVm.onFailTryAgain,
                       buttonText: "Try Again",
                     )
-                  : addProductVm.isSuccess.isTrue
+                /*  : addProductVm.isSuccess.isTrue
                       ? InfoWidget(
                           title: "Successfully Added",
                           isLottie: true,
@@ -64,7 +66,7 @@ class AddProductScreen extends StatelessWidget {
                           isButton: true,
                           onClick: () => addProductVm.isSuccess.value = false,
                           buttonText: "Add More",
-                        )
+                        )*/
                       : Form(
                           key: addProductVm.formKey,
                           child: Padding(
@@ -104,6 +106,18 @@ class AddProductScreen extends StatelessWidget {
                                           addProductVm.itemCodeTextController,
                                       hintText: "Item Code",
                                       label: "Item Code",
+                                    )),
+                                const SizedBox(
+                                  height: kPadding18,
+                                ),
+                                SizedBox(
+                                    height: 45,
+                                    child: CustomTextFormField(
+                                      isEnable: false,
+                                      textController:
+                                      addProductVm.companyTextController,
+                                      hintText: "Company",
+                                      label: "Company",
                                     )),
                                 const SizedBox(
                                   height: kPadding18,
@@ -258,15 +272,15 @@ class AddProductScreen extends StatelessWidget {
                     onClick: () {
                       if (addProductVm.formKey.currentState!.validate()) {
 
-                        if(addProductVm.categoryTextController.text.isNotEmpty && addProductVm.officeDropDown != null) {
+                        if(addProductVm.categoryTextController.text.isNotEmpty && addProductVm.categoryTextController.text.isNotEmpty) {
                           addProductVm.addToFireStore(isUpdate : isUpdate);
                         } else {
 
-                          Get.snackbar("Please Select Office And Category", "",colorText: Theme.of(context).textTheme.bodyText2!.color);
+                          Get.snackbar("Fail To Add", "Please Select Office And Category",colorText: Theme.of(context).textTheme.bodyText2!.color);
                         }
 
                       } else {
-                        Get.snackbar("Please Select Office And Category", "",colorText: Theme.of(context).errorColor);
+                        Get.snackbar("Fail to Add", "Please Select Office And Category",colorText: Theme.of(context).errorColor);
 
                       }
                     },
