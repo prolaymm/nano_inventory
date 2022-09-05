@@ -1,6 +1,9 @@
+import 'dart:core';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:nano_inventory/core/vos/drop_down_vo.dart';
 
 import '../core/service/persistence_service.dart';
@@ -17,15 +20,17 @@ class AddProductViewModel extends GetxController {
   TextEditingController alertQuantityTextController =
       TextEditingController(text: "0");
 
+  ///current time
+
+  String currentTime =DateFormat('yyyy-MM-dd hh:mm:ss').format(DateTime.now()).toString();
   ///category drop down
-  Rx<DropDownVo> dropDownCategoryValue = DropDownVo().obs;
+  Rx<DropDownVo>? dropDownCategoryValue;
   RxBool isDropDownCategoryNull = false.obs;
   Rx nullCategoryDropDown = null.obs;
 
   ///user data from persistance
   final persistenceService = Get.find<PersistenceService>();
   Map? mUserData;
-
 
   ///form key
   GlobalKey<FormState> formKey = GlobalKey();
@@ -36,6 +41,28 @@ class AddProductViewModel extends GetxController {
   RxString message = "".obs;
   RxBool isSuccess = false.obs;
   ProductVo updateVo = ProductVo();
+
+  List <DropDownVo> testVo = [
+    DropDownVo(
+      id: "1",
+      title: 'NanoLabs',
+    ),
+    DropDownVo(
+      id: "2",
+      title: 'LMT',
+    ),
+    DropDownVo(
+      id: "3",
+      title: 'MEKONG',
+    ),
+    DropDownVo(
+      id: "4",
+      title: 'Smart Tech',
+    ),
+
+  ];
+
+  DropDownVo? officeDropDown;
 
   ///drop down for company list
   RxList<DropDownVo> companyList = RxList([
@@ -56,7 +83,7 @@ class AddProductViewModel extends GetxController {
       title: 'Smart Tech',
     ),
   ]);
-  Rx<DropDownVo> dropDownCompanyValue = DropDownVo().obs;
+  Rx<DropDownVo>? dropDownCompanyValue;
   RxBool isDropDownCompanyNull = false.obs;
   Rx nullCompanyDropDown = null.obs;
 
@@ -85,7 +112,7 @@ class AddProductViewModel extends GetxController {
       updateVo.history?.add(History(
           editBy: mUserData!["user_name"],
           qty: 20,
-          editDate: DateTime.now().toString(),
+          editDate: currentTime,
           total: 50));
     }
 
@@ -95,14 +122,14 @@ class AddProductViewModel extends GetxController {
     isSuccess.value = false;
     Map<String, dynamic> data = {
       "add_by": mUserData!["user_name"],
-      "created_time": DateTime.now().toString(),
+      "created_time": currentTime,
       "description": descriptionTextController.text,
       "alert_count": int.parse(alertQuantityTextController.text),
       "brand": brandNameTextController.text,
       "category": categoryTextController.text,
       "code": itemCodeTextController.text,
       "item_name": itemNameTextController.text,
-      "office": "Mekong",
+      "office": officeDropDown?.title,
       "qty": int.parse(quantityTextController.text),
       "history": updateVo.history == [] || updateVo.history == null
           ? []
@@ -155,6 +182,7 @@ class AddProductViewModel extends GetxController {
     categoryTextController.text = "";
     descriptionTextController.text = "";
     alertQuantityTextController.text = "0";
+    officeDropDown = null;
     /*  brandNameTextController.dispose();
     itemNameTextController.dispose();
     itemCodeTextController.dispose();
@@ -183,16 +211,14 @@ class AddProductViewModel extends GetxController {
     alertQuantityTextController.text = vo.alertCount.toString();
   }
 
-  onDropDownChange({ DropDownVo? value, bool? isCompany}) {
-    dropDownCompanyValue.value = value!;
-    isDropDownCompanyNull.value = true;
-    if (isCompany == true) {
-  //    dropDownCategoryValue.value = value;
-     // isDropDownCategoryNull.value = true;
+  onDropDownChange(DropDownVo? value) {
+    dropDownCompanyValue?.value = value!;
+    isDropDownCompanyNull.value = false;
+    officeDropDown = value;
+    print("this is $officeDropDown" );
+update();
 
-    } else {
-      dropDownCategoryValue.value = value;
-      isDropDownCategoryNull.value = true;
-    }
   }
+
+
 }

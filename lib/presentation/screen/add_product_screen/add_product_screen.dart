@@ -257,7 +257,17 @@ class AddProductScreen extends StatelessWidget {
                     title: 'Upload',
                     onClick: () {
                       if (addProductVm.formKey.currentState!.validate()) {
-                        addProductVm.addToFireStore(isUpdate : isUpdate);
+
+                        if(addProductVm.categoryTextController.text.isNotEmpty && addProductVm.officeDropDown != null) {
+                          addProductVm.addToFireStore(isUpdate : isUpdate);
+                        } else {
+
+                          Get.snackbar("Please Select Office And Category", "",colorText: Theme.of(context).textTheme.bodyText2!.color);
+                        }
+
+                      } else {
+                        Get.snackbar("Please Select Office And Category", "",colorText: Theme.of(context).errorColor);
+
                       }
                     },
                     buttonColor: Theme.of(context).primaryColor,

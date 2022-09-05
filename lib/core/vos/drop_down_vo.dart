@@ -10,4 +10,10 @@ class DropDownVo {
 
   @override
   int get hashCode => id.hashCode;
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return {"id" : id,"title" : title}.toString();
+  }
 }
