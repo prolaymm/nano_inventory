@@ -103,6 +103,10 @@ class ProductVo {
         "qty": qty,
         "history": List<dynamic>.from(history!.map((x) => x.toJson())),
       };
+  @override
+  String toString() {
+    return toJson().toString();
+  }
 }
 
 @HiveType(typeId: hiveHistoryId)
@@ -139,4 +143,6 @@ class History {
         "edit_date": editDate,
         "total": total,
       };
+
+
 }

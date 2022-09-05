@@ -10,4 +10,5 @@ class AppRouteName {
   static const String rLogin = "/login";
   static const String rUpdateUserInfo = "/update-user-info";
   static const String rTest = "/test";
+  static const String rStockLeft = "/stock-left";
 }

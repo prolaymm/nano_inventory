@@ -12,6 +12,7 @@ import 'package:nano_inventory/presentation/screen/home_screen/home_screen.dart'
 import 'package:nano_inventory/presentation/screen/product_detail_screen/product_detail_screen.dart';
 import 'package:nano_inventory/presentation/screen/product_screen/product_screen.dart';
 import 'package:nano_inventory/presentation/screen/search_screen/search_screen.dart';
+import 'package:nano_inventory/presentation/screen/stock_left_screen/stock_left_screen.dart';
 
 
 import '../../di/login_binding.dart';
@@ -31,6 +32,8 @@ class RegisterPageRoute {
     GetPage(name: AppRouteName.rLogin, page: ()=> const LoginScreen(),binding: LoginBinding()),
     GetPage(name: AppRouteName.rUpdateUserInfo, page: ()=> const UpdateUserInfoScreen(),binding: LoginBinding()),
     GetPage(name: AppRouteName.rTest, page: ()=> const DropDownTest(),binding: AddProductBinding()),
+    GetPage(name: AppRouteName.rStockLeft, page: ()=> const StockLeftScreen()),
+
 
   ];
 }

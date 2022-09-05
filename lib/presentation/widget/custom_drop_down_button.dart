@@ -23,11 +23,21 @@ class CustomDropDownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: double.infinity,
+      height: 45,
+      padding:const EdgeInsets.symmetric(horizontal: kPadding8),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primaryContainer,
+        border: Border.all(
+          color: Theme.of(context).primaryColor
+        )
+      ),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton(
+        child: DropdownButton<DropDownVo>(
             isExpanded: true,
+
+
             hint: TextView(
               text: hintText,
               fontSize: k16Font,
@@ -46,7 +56,7 @@ class CustomDropDownButton extends StatelessWidget {
                 ),
               );
             }).toList(),
-            onChanged: onChanged),
+            onChanged:  onChanged),
       ),
     );
   }

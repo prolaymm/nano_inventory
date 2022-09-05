@@ -76,16 +76,9 @@ class ProductScreen extends StatelessWidget {
                               child: ListView.builder(
                                   itemCount: productVm.mProductList.length,
                                   itemBuilder: (_, position) {
-                                    return GestureDetector(
-                                        onTap: () => Get.toNamed(
-                                                AppRouteName.rProductDetail,
-                                                arguments: {
-                                                  "vo": productVm
-                                                      .mProductList[position],
-                                                }),
-                                        child: ProductContainer(
-                                          vo: productVm.mProductList[position],
-                                        ));
+                                    return ProductContainer(
+                                      vo: productVm.mProductList[position],
+                                    );
                                   }),
                             ),
                           ],
