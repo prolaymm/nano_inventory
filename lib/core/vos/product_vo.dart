@@ -15,6 +15,9 @@ List<ProductVo> productVoFromJson(String str) =>
 
 String productVoToJson(ProductVo data) => json.encode(data.toJson());
 
+List<ProductVo> productVoFromCsv(List<dynamic> csvList) =>
+    List<ProductVo>.from(csvList.map((x) => ProductVo.fromCsv(x)));
+
 @HiveType(typeId: hiveProductId)
 class ProductVo {
   ProductVo({
@@ -90,6 +93,20 @@ class ProductVo {
             doc.data()!["history"].map((x) => History.fromJson(x))),
       );
 
+  factory ProductVo.fromCsv(dynamic) => ProductVo(
+        addBy: dynamic[0],
+        createdTime: dynamic[1],
+        description: dynamic[2],
+        alertCount: 3,
+        brand: dynamic[4],
+        category: dynamic[5],
+        code: dynamic[6],
+        itemName: dynamic[7],
+        office: dynamic[8],
+        qty: 10,
+        history: [],
+      );
+
   Map<String, dynamic> toJson() => {
         "add_by": addBy,
         "created_time": createdTime,
@@ -103,6 +120,7 @@ class ProductVo {
         "qty": qty,
         "history": List<dynamic>.from(history!.map((x) => x.toJson())),
       };
+
   @override
   String toString() {
     return toJson().toString();
@@ -118,7 +136,7 @@ class History {
     this.total,
   });
 
-@HiveField(0)
+  @HiveField(0)
   String? editBy;
 
   @HiveField(1)
@@ -143,6 +161,4 @@ class History {
         "edit_date": editDate,
         "total": total,
       };
-
-
 }

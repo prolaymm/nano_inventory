@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nano_inventory/core/vos/product_vo.dart';
 import 'package:nano_inventory/presentation/widget/product_container.dart';
 
 import '../../../utils/dimens.dart';
+import '../../route/app_route_name.dart';
 import '../../widget/info_widget.dart';
 import '../../widget/simple_app_bar.dart';
 import '../../widget/text_view.dart';
@@ -52,7 +54,12 @@ class StockLeftScreen extends StatelessWidget {
                       DocumentSnapshot<Map<String, dynamic>> docData =
                           doc as DocumentSnapshot<Map<String, dynamic>>;
 
-                      return ProductContainer(vo: filterList[index]);
+                      return GestureDetector(
+                          onTap: () => Get.toNamed(AppRouteName.rProductDetail,
+                                  arguments: {
+                                    "vo": filterList[index],
+                                  }),
+                          child: ProductContainer(vo: filterList[index]));
                     });
           }
           if (snapshot.connectionState == ConnectionState.waiting) {

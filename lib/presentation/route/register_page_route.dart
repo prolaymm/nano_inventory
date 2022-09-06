@@ -3,6 +3,7 @@ import 'package:nano_inventory/di/add_product_binding.dart';
 import 'package:nano_inventory/di/category_binding.dart';
 import 'package:nano_inventory/di/home_binding.dart';
 import 'package:nano_inventory/di/product_binding.dart';
+import 'package:nano_inventory/di/read_csv_binding.dart';
 import 'package:nano_inventory/di/search_binding.dart';
 import 'package:nano_inventory/presentation/route/app_route_name.dart';
 import 'package:nano_inventory/presentation/screen/add_product_screen/add_product_screen.dart';
@@ -11,6 +12,7 @@ import 'package:nano_inventory/presentation/screen/category_screen/category_scre
 import 'package:nano_inventory/presentation/screen/home_screen/home_screen.dart';
 import 'package:nano_inventory/presentation/screen/product_detail_screen/product_detail_screen.dart';
 import 'package:nano_inventory/presentation/screen/product_screen/product_screen.dart';
+import 'package:nano_inventory/presentation/screen/read_csv_screen/read_csv_screen.dart';
 import 'package:nano_inventory/presentation/screen/search_screen/search_screen.dart';
 import 'package:nano_inventory/presentation/screen/stock_left_screen/stock_left_screen.dart';
 
@@ -32,6 +34,7 @@ class RegisterPageRoute {
     GetPage(name: AppRouteName.rLogin, page: ()=> const LoginScreen(),binding: LoginBinding()),
     GetPage(name: AppRouteName.rUpdateUserInfo, page: ()=> const UpdateUserInfoScreen(),binding: LoginBinding()),
     GetPage(name: AppRouteName.rTest, page: ()=> const DropDownTest(),binding: AddProductBinding()),
+    GetPage(name: AppRouteName.rReadCsv, page: ()=> const ReadCsvScreen(),binding: ReadCsvBinding()),
     GetPage(name: AppRouteName.rStockLeft, page: ()=> const StockLeftScreen()),
 
 
