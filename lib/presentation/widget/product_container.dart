@@ -8,8 +8,9 @@ import '../route/app_route_name.dart';
 
 class ProductContainer extends StatelessWidget {
   final ProductVo vo;
+  final bool? isReadFromCsv;
 
-  const ProductContainer({Key? key, required this.vo}) : super(key: key);
+  const ProductContainer({Key? key, required this.vo, this.isReadFromCsv,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +86,7 @@ class ProductContainer extends StatelessWidget {
                     .hintColor,
                 fontSize: k14Font,
               ),
-              GestureDetector(
+            if(isReadFromCsv !=true)  GestureDetector(
                   onTap: () =>
                       Get.toNamed(AppRouteName.rAddProduct,
                           arguments: {

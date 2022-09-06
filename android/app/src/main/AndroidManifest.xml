@@ -2,6 +2,7 @@
     package="aj.nanoinventory.company.nano_inventory">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAG                                                                                                                                                                                                                                                                                                                                                                                                                                                         E" />
    <application
         android:label="Nano Inventory"
         android:name="${applicationName}"
