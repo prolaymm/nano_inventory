@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme:  AppTheme.lightTheme,
       getPages: RegisterPageRoute().getPages,
-     initialRoute:authValue!["token"]==""? AppRouteName.rLogin : AppRouteName.rProduct,
+     initialRoute:authValue!["token"]==""? AppRouteName.rLogin : AppRouteName.rHome,
 
     );
   }

@@ -39,7 +39,7 @@ class ReadCsvViewModel extends GetxController {
   }
 
   readCsvFromFileSystem() async {
-    print("file");
+
     try {
       fileResult = await FilePicker.platform.pickFiles(
           type: FileType.custom,
