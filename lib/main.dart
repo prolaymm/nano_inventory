@@ -18,12 +18,6 @@ void main() async{
    await localStorageService.readToken();
 
   runApp( MyApp(authValue: localStorageService.secureData,));
-/*  runApp(
-    DevicePreview(
-      enabled: true,
-      builder: (context) => const MyApp(),
-    ),
-  );*/
 }
 
 class MyApp extends StatelessWidget {
