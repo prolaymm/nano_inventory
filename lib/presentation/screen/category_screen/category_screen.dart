@@ -25,15 +25,13 @@ class CategoryScreen extends StatelessWidget {
         stream: FirebaseFirestore.instance.collection('category').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-
             print(CategoryDb().getAllCategory());
             return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot doc = snapshot.data!.docs[index];
 
-
-                CategoryDb().saveCategory(
+                  CategoryDb().saveCategory(
                       category: CategoryVo(id: doc.id, title: doc["type"]));
                   return Container(
                       padding: const EdgeInsets.all(kPadding16),
@@ -68,6 +66,11 @@ class CategoryScreen extends StatelessWidget {
                         ],
                       ));
                 });
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
           if (snapshot.hasError) {
             return const Center(

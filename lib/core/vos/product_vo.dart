@@ -32,6 +32,7 @@ class ProductVo {
     this.office,
     this.qty,
     this.id,
+    this.holder,
     this.history,
   });
 
@@ -59,6 +60,8 @@ class ProductVo {
   int? qty;
   @HiveField(11)
   List<History>? history;
+  @HiveField(12)
+  String? holder;
 
   factory ProductVo.fromJson(Map<String, dynamic> json) => ProductVo(
         addBy: json["add_by"],
@@ -71,6 +74,7 @@ class ProductVo {
         itemName: json["item_name"],
         office: json["office"],
         qty: json["qty"],
+        holder: json["holder"],
         history:
             List<History>.from(json["history"].map((x) => History.fromJson(x))),
       );
@@ -89,22 +93,24 @@ class ProductVo {
         itemName: doc.data()!["item_name"],
         office: doc.data()!["office"],
         qty: doc.data()!["qty"],
+        holder: doc.data()!["holder"],
         history: List<History>.from(
             doc.data()!["history"].map((x) => History.fromJson(x))),
       );
 
   factory ProductVo.fromCsv(dynamic) => ProductVo(
-        addBy: dynamic[0],
-        createdTime: dynamic[1],
-        description: dynamic[2],
-        alertCount: 3,
-        brand: dynamic[4],
-        category: dynamic[5],
-        code: dynamic[6],
-        itemName: dynamic[7],
-        office: dynamic[8],
-        qty: 10,
-        history: [],
+      addBy: dynamic[0]??"Arjun",
+      createdTime: dynamic[1]??"",
+      description: dynamic[2].toString(),
+      alertCount: 0,
+      brand: dynamic[4]??"",
+      category: dynamic[5]??"",
+      code: dynamic[6]??"",
+      itemName: dynamic[7]??"",
+      office: dynamic[8]??"",
+      qty: int.parse("${dynamic[9]??0}"),
+    holder: dynamic[10]??0,
+      history: [],
       );
 
   Map<String, dynamic> toJson() => {

@@ -28,6 +28,7 @@ class ProductVoAdapter extends TypeAdapter<ProductVo> {
       office: fields[9] as String?,
       qty: fields[10] as int?,
       id: fields[1] as String?,
+      holder: fields[12] as String?,
       history: (fields[11] as List?)?.cast<History>(),
     );
   }
@@ -35,7 +36,7 @@ class ProductVoAdapter extends TypeAdapter<ProductVo> {
   @override
   void write(BinaryWriter writer, ProductVo obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.addBy)
       ..writeByte(1)
@@ -59,7 +60,9 @@ class ProductVoAdapter extends TypeAdapter<ProductVo> {
       ..writeByte(10)
       ..write(obj.qty)
       ..writeByte(11)
-      ..write(obj.history);
+      ..write(obj.history)
+      ..writeByte(12)
+      ..write(obj.holder);
   }
 
   @override

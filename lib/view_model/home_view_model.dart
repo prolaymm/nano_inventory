@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:nano_inventory/presentation/route/app_route_name.dart';
 
+import '../core/helper/auth_helper.dart';
+
 class HomeViewModel extends GetxController {
   List<Map<String, dynamic>> mHomeCategory = [
     {
@@ -24,4 +26,11 @@ class HomeViewModel extends GetxController {
       "onClick": () => Get.toNamed(AppRouteName.rStockLeft)
     },
   ];
+
+
+  onLogOut() {
+
+    AuthHelper().deleteAuthToken();
+    Get.offAndToNamed(AppRouteName.rLogin);
+  }
 }

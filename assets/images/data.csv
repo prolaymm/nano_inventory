@@ -1,0 +1,58 @@
+add_by,created_time,description,alert_count,brand,category,code,item_name,office,qty,holder
+,,1.5 horse power,,ChangChong,Air Con,LIG0001,,LIG,1,
+,,1.5 horse power,,Chigo,Air Con,LIG0002,,LIG,1,
+,,2 horse power- stand,,Chigo,Air Con,LIG0003,,LIG,1,
+,,1 horse power,,Gree,Air Con,LIG0004,,LIG,1,
+,,,,Midea,Water Cooler,LIG0005,,LIG,1,
+,,,,Ezviz,Air Purifier,LIG0006,,Mekong,1,
+,,,,Sonoff,CCTV,LIG0007,,LIG,1,
+,,,,,Bean Bag,LIG0008,,LIG,2,
+,,,,Midea,Refrigerator,LIG0009,,LIG,1,
+,,,,Mi,TV,LIG0010,,LIG,1,
+,,,,Canon,Printer,LIG0011,G4010,LIG,1,
+,,,,Xprinter,Bar code printer,LIG0012,XP-H500E,LIG,1,
+,,,,Amazon,Alexa,LIG0013,,,0,
+,,,,Google,Nest Mini,LIG0014,,,0,
+,,,,Apple,Home pod mini,LIG0015,,,0,
+,,wireless access point,,Ruijie,Access Point,LIG0016,RG-AP720-L,LIG,2,
+,,,,Sony,Projector,LIG0017,,LIG,1,
+,,"Ram 4, 64GB",,Huawei,Phone,LIG0018,Y6P,LMT,0,
+,,,,,Clock,LIG0019,,,0,
+,,"Ram 6GB, 64GB",,Samsung,Tablet,LIG0020,Tab S4,LMT,1,Nay Lin Thu
+,,"i5 7th gen - 256GB
+Ram 8GB Graphic 4GB",,Lenovo,Laptop,LIG0021,Think pad,LMT,1,Soe Htet Kyaw
+,,"i3 10th gen - V14-82C4
+Ram 8GB, 1T",,Lenovo,Laptop,LIG0022,Idea pad,LMT,1,Thin Nu Nu Zin
+,,"i3 5th gen
+Ram 8GB, 500GB,",,Acer,Laptop,LIG0023,Aspire V3 574G,LMT,1,Belle Kim
+,,"A1502, Ram 8GB, 512GB",,Apple,Macbook,LIG0024,2014 pro,Nanolabs,1,Nay Lin Thu
+,,,,Iris Ohyama,Vacuum cleaner,LIG0025,,LMT,1,
+,,,,,Laptop,LIG0026,,LMT,1,Nyi Nyi Aung
+,,,,,Laptop,LIG0027,,LMT,1,Nyi Nyi Aung
+,,"A1502, Ram 8GB, 512GB",,Apple,Macbook,LIG0028,2014 pro,Nanoabs,1,
+,,L360,,Epson,Printer,LIG0029,,LMT,1,
+,,,,,Filling cabinet,LIG0030,,LIG,2,
+,,R730,,Dell,Server,LIG0031,,LMT,1,
+,,230,,Dell,Server,LIG0032,,LMT,2,
+,,nippon POS,,Nippon,Barcode scanner,LIG0033,,Mekong,1,
+,,,,Kangaroo,Kettle,LIG0034,,LIG,1,
+,,,30,,Paper- 70GSM,LIG0035,,,70,
+,,,30,,Peper- 100GSM,LIG0036,,,80,
+,,,,,L-file,LIG0037,,,20,
+,,,,,Paper-file,LIG0038,,,10,
+,,,,,Stapler-9mm,LIG0039,blue,LIG,1,
+,,,,,Stapler-9mm,LIG0040,green,LIG,1,
+,,,,,Stapler-12mm,LIG0041,black,LIG,1,
+,,,,,Glue stick,LIG0042,,LIG,2,
+,,,,,Correction pen,LIG0043,,LIG,1,
+,,"LMT,GCM,Tagon",,,Stamp,LIG0044,,LIG,8,
+,,,,,Penholder,LIG0045,,LIG,6,
+,,,,,Tape,LIG0046,,LIG,2,
+,,,,,Tape Dispenser,LIG0047,,LIG,1,
+,,,,,Hole Punch,LIG0048,,LIG,1,
+,,,,,Calculator,LIG0049,,LIG,1,
+,,,,,Tissue,LIG0050, ,LIG ,0,
+,,,,,Scissor,LIG0051,,LIG,1,
+,,,,,Knife,LIG0052,,LIG,2,
+,,,,,Eraser,LIG0053,,LIG,2,
+,,,,, ,,,,,

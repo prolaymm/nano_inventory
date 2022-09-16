@@ -55,7 +55,7 @@ class ReadCsvScreen extends StatelessWidget {
                             child: CustomButton(
                               title: 'Upload',
                               onClick: () {
-                                Get.snackbar("Comming Soon", "We will be back");
+                                readCsvVm.uploadToFireStore();
 
                                 /*  if(readCsvVm.mCsvList.isNotEmpty) {
                                   readCsvVm.addToFireStore();
@@ -81,7 +81,7 @@ class ReadCsvScreen extends StatelessWidget {
                 : Theme.of(context).primaryColor,
             onPressed: readCsvVm.mCsvList.isNotEmpty
                 ? readCsvVm.deleteAllCsvData
-                : readCsvVm.readCsvFromFileSystem,
+                : readCsvVm.loadCsv,
             child:
                 Icon(readCsvVm.mCsvList.isNotEmpty ? Icons.delete : Icons.add)),
       ),
