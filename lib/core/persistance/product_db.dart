@@ -14,7 +14,9 @@ class ProductDb {
   Future<void> saveProductList({required List<ProductVo> productList}) async {
     getProductBox().addAll(productList);
   }
-
+  Future<void> saveSingleProduct({required ProductVo productVo}) async {
+    getProductBox().put(productVo.id, productVo);
+  }
   List<ProductVo> getAllProduct() {
     return getProductBox().values.toList().isEmpty
         ? []

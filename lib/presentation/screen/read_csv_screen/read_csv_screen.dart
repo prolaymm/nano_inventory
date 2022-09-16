@@ -51,16 +51,17 @@ class ReadCsvScreen extends StatelessWidget {
                     () => readCsvVm.mCsvList.isNotEmpty
                         ? Container(
                             width: 200,
-
                             margin: const EdgeInsets.only(bottom: kPadding12),
                             child: CustomButton(
                               title: 'Upload',
                               onClick: () {
-                                if(readCsvVm.mCsvList.isNotEmpty) {
+                                readCsvVm.uploadToFireStore();
+
+                                /*  if(readCsvVm.mCsvList.isNotEmpty) {
                                   readCsvVm.addToFireStore();
                                 } else {
                                   Get.snackbar("No Data to Uplaod", "Please Fill Data");
-                                }
+                                }*/
 
                               },
                               buttonColor: Theme.of(context).primaryColor,
@@ -80,7 +81,7 @@ class ReadCsvScreen extends StatelessWidget {
                 : Theme.of(context).primaryColor,
             onPressed: readCsvVm.mCsvList.isNotEmpty
                 ? readCsvVm.deleteAllCsvData
-                : readCsvVm.readCsvFromFileSystem,
+                : readCsvVm.loadCsv,
             child:
                 Icon(readCsvVm.mCsvList.isNotEmpty ? Icons.delete : Icons.add)),
       ),

@@ -3,7 +3,7 @@ import 'package:nano_inventory/presentation/widget/text_view.dart';
 
 import '../../utils/dimens.dart';
 
-Widget _rowText(
+Widget rowText(
     {required context, required String hint, required String title}) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -13,10 +13,13 @@ Widget _rowText(
         fontSize: k14Font,
         color: Theme.of(context).hintColor,
       ),
-      TextView(
-        text: title,
-        fontSize: k16Font,
-        fontWeight: FontWeight.bold,
+      Flexible(
+        child: TextView(
+          text: title,
+          maxLine: 2,
+          fontSize: k16Font,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     ],
   );

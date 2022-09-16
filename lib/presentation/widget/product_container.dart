@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nano_inventory/presentation/widget/text_view.dart';
+import 'package:nano_inventory/presentation/widget/custom_button.dart';
+import 'package:nano_inventory/presentation/widget/row_text.dart';
+
 
 import '../../core/vos/product_vo.dart';
 import '../../utils/dimens.dart';
@@ -10,130 +12,71 @@ class ProductContainer extends StatelessWidget {
   final ProductVo vo;
   final bool? isReadFromCsv;
 
-  const ProductContainer({Key? key, required this.vo, this.isReadFromCsv,}) : super(key: key);
+  const ProductContainer({
+    Key? key,
+    required this.vo,
+    this.isReadFromCsv,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120,
       margin: const EdgeInsets.only(
-          top: 8,
-          bottom: 6,
-          left: kPadding16,
-          right: kPadding16),
-      padding:
-      const EdgeInsets.all(kPadding12),
+          top: 8, bottom: 6, left: kPadding16, right: kPadding16),
+      padding: const EdgeInsets.all(kPadding12),
       decoration: BoxDecoration(
-          color: Theme
-              .of(context)
-              .colorScheme
-              .primaryContainer,
-          borderRadius:
-          BorderRadius.circular(20),
+          color: vo.qty!<= vo.alertCount! ?const Color(0xfffae0e4)  : Theme.of(context).colorScheme.primaryContainer,
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Theme
-                  .of(context)
-                  .colorScheme
-                  .shadow,
+              color: Theme.of(context).colorScheme.shadow,
               spreadRadius: 4,
               blurRadius: 4,
             )
           ]),
       child: Column(
-        mainAxisAlignment:
-        MainAxisAlignment.start,
-        crossAxisAlignment:
-        CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment:
-            MainAxisAlignment
-                .spaceBetween,
-            children: [
-              TextView(
-                text: vo
-                    .itemName ??
-                    "",
-                fontWeight: FontWeight.bold,
-                fontSize: k16Font,
-              ),
-              TextView(
-                text: vo
-                    .createdTime ??
-                    '',
-                color: Theme
-                    .of(context)
-                    .hintColor,
-                fontSize: 10,
-              ),
-            ],
-          ),
+          rowText(
+              context: context, hint: "Item Name", title: vo.itemName ?? ""),
           const SizedBox(
             height: 6,
           ),
-          Row(
-            mainAxisAlignment:
-            MainAxisAlignment
-                .spaceBetween,
-            children: [
-              TextView(
-                text: vo
-                    .code ??
-                    "",
-                color: Theme
-                    .of(context)
-                    .hintColor,
-                fontSize: k14Font,
-              ),
-            if(isReadFromCsv !=true)  GestureDetector(
-                  onTap: () =>
-                      Get.toNamed(AppRouteName.rAddProduct,
-                          arguments: {
-                            "vo": vo,
-                            "isUpdate": true
-                          }),
-                  child: SizedBox(
-                    width: 50,
-                    height: 25,
-                    child: Icon(
-                      Icons.edit,
-                      color: Theme
-                          .of(context)
-                          .errorColor,
-                      size: 18,
-                    ),
-                  ))
-            ],
-          ),
+          rowText(context: context, hint: "Brand Name", title: vo.brand ?? ""),
           const SizedBox(
             height: 6,
           ),
-          TextView(
-            text: vo
-                .brand ??
-                "",
-            color: Theme
-                .of(context)
-                .textTheme
-                .bodyText2!
-                .color,
-            fontWeight: FontWeight.bold,
-            fontSize: k14Font,
-          ),
+          rowText(context: context, hint: "Product Code", title: vo.code ?? ""),
           const SizedBox(
             height: 6,
           ),
-          TextView(
-            text: "${ vo.qty} Items",
-            color: Theme
-                .of(context)
-                .textTheme
-                .bodyText2!
-                .color,
-            fontWeight: FontWeight.bold,
-            fontSize: k14Font,
+
+          const SizedBox(
+            height: 6,
           ),
+          rowText(context: context, hint: "Item Left", title: "${vo.qty??""} Items"),
+          const SizedBox(
+            height: 6,
+          ),
+          rowText(context: context, hint: "Alert Qty", title: "${vo.alertCount??""} Items" ),
+           SizedBox(
+            height: isReadFromCsv !=true? 12 : 0,
+          ),
+          if(isReadFromCsv !=true)    SizedBox(
+            height: 35,
+            width: double.infinity,
+            child: CustomButton(
+              onClick: () => Get.toNamed(AppRouteName.rAddProduct,
+                  arguments: {
+                    "vo": vo,
+                    "isUpdate": true
+                  }),
+              title: "Edit",
+              buttonColor:  vo.qty!<= vo.alertCount! ? Theme.of(context).colorScheme.primaryContainer  : Theme.of(context).colorScheme.error,
+              textColor:vo.qty!<= vo.alertCount!?  Theme.of(context).errorColor : Theme.of(context).colorScheme.primaryContainer,
+            ),
+          )
         ],
       ),
     );

@@ -36,7 +36,6 @@ class StockLeftScreen extends StatelessWidget {
                   documentSnapshot[i]["alert_count"]) {
                 ProductVo vo =
                     ProductVo.fromDocumentSnapshot(documentSnapshot[i]);
-                print(vo);
                 filterList.add(vo);
               }
             }
@@ -51,8 +50,6 @@ class StockLeftScreen extends StatelessWidget {
                     itemCount: filterList.length,
                     itemBuilder: (context, index) {
                       DocumentSnapshot doc = snapshot.data!.docs[index];
-                      DocumentSnapshot<Map<String, dynamic>> docData =
-                          doc as DocumentSnapshot<Map<String, dynamic>>;
 
                       return GestureDetector(
                           onTap: () => Get.toNamed(AppRouteName.rProductDetail,
