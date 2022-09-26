@@ -39,7 +39,7 @@ class ProductContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           rowText(
-              context: context, hint: "Item Name", title: vo.itemName ?? ""),
+              context: context, hint: "Category", title: vo.category ?? "_"),
           const SizedBox(
             height: 6,
           ),

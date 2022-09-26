@@ -23,7 +23,9 @@ class AddProductViewModel extends GetxController {
 
   ///current time
 
-  String currentTime =DateFormat('yyyy-MM-dd hh:mm:ss').format(DateTime.now()).toString();
+  String currentTime =
+      DateFormat('yyyy-MM-dd hh:mm:ss').format(DateTime.now()).toString();
+
   ///category drop down
   Rx<DropDownVo>? dropDownCategoryValue;
   RxBool isDropDownCategoryNull = false.obs;
@@ -43,7 +45,7 @@ class AddProductViewModel extends GetxController {
   RxBool isSuccess = false.obs;
   ProductVo updateVo = ProductVo();
 
-  List <DropDownVo> testVo = [
+  List<DropDownVo> testVo = [
     DropDownVo(
       id: "1",
       title: 'NanoLabs',
@@ -60,7 +62,6 @@ class AddProductViewModel extends GetxController {
       id: "4",
       title: 'Smart Tech',
     ),
-
   ];
 
   DropDownVo? officeDropDown;
@@ -110,7 +111,6 @@ class AddProductViewModel extends GetxController {
 
   addToFireStore({required isUpdate}) async {
     if (isUpdate) {
-
       updateVo.history?.add(History(
           editBy: mUserData!["user_name"],
           qty: 20,
@@ -185,14 +185,6 @@ class AddProductViewModel extends GetxController {
     descriptionTextController.text = "";
     alertQuantityTextController.text = "0";
     officeDropDown = null;
-    /*  brandNameTextController.dispose();
-    itemNameTextController.dispose();
-    itemCodeTextController.dispose();
-    quantityTextController.dispose();
-    brandTextController.dispose();
-    categoryTextController.dispose();
-    descriptionTextController.dispose();
-    alertQuantityTextController.dispose();*/
   }
 
   onFailTryAgain() {
@@ -204,12 +196,13 @@ class AddProductViewModel extends GetxController {
   updateProductInfo() {}
 
   textControllerValueForEdit(ProductVo vo) {
-    brandNameTextController.text = vo.brand ?? "";
-    itemNameTextController.text = vo.itemName ?? "";
-    itemCodeTextController.text = vo.code ?? "";
+    brandNameTextController.text = vo.brand ?? "//";
+    itemNameTextController.text = vo.itemName ?? "--";
+    itemCodeTextController.text = vo.code ?? "_";
     quantityTextController.text = vo.qty.toString();
-    categoryTextController.text = vo.category ?? "";
-    descriptionTextController.text = vo.description ?? "";
+    categoryTextController.text = vo.category ?? "_";
+    companyTextController.text = vo.office ?? "_";
+    descriptionTextController.text = vo.description ?? "_";
     alertQuantityTextController.text = vo.alertCount.toString();
   }
 
@@ -217,10 +210,7 @@ class AddProductViewModel extends GetxController {
     dropDownCompanyValue?.value = value!;
     isDropDownCompanyNull.value = false;
     officeDropDown = value;
-    print("this is $officeDropDown" );
-update();
-
+    print("this is $officeDropDown");
+    update();
   }
-
-
 }
