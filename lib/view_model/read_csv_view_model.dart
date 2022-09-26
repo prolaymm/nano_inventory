@@ -20,7 +20,7 @@ class ReadCsvViewModel extends GetxController {
   RxBool isSuccess = false.obs;
   FilePickerResult? fileResult;
   String currentTime =
-      DateFormat('yyyy-MM-dd hh:mm:ss').format(DateTime.now()).toString();
+  DateFormat('yyyy-MM-dd hh:mm:ss').format(DateTime.now()).toString();
 
   ///read persisntace data
   final persistenceService = Get.find<PersistenceService>();
@@ -37,7 +37,7 @@ class ReadCsvViewModel extends GetxController {
 
     print(mTestCsv.length);
 
-    for (int i = 1; i < _listData.length-1; i++) {
+    for (int i = 1; i < _listData.length - 1; i++) {
       print(i);
       mCsvList.add(ProductVo.fromCsv(_listData[i]));
     }
@@ -71,28 +71,25 @@ class ReadCsvViewModel extends GetxController {
   }
 
 
-
-
-  csvFileDataToObject(List<dynamic> csvData) async{
-
+  csvFileDataToObject(List<dynamic> csvData) async {
     mCsvList.clear();
     for (int i = 1; i < csvData.length; i++) {
       mCsvList.add(ProductVo.fromCsv(csvData[i]));
       Map<String, dynamic> data = {
-        "addBy": csvData[i][0]??"Arjun",
-        "createdTime": csvData[i][1]??"",
-        "description": csvData[i][2]??"",
-       "alertCount": 0,
-        "brand": csvData[i][4]??"",
-        "category": csvData[i][5]??"",
-        "code": csvData[i][6]??"",
-        "itemName": csvData[i][7]??"",
-        "office": csvData[i][8]??"",
-        "qty": csvData[i][9]??0,
-        "holder": csvData[i][10]??0,
+        "addBy": csvData[i][0] ?? "Arjun",
+        "createdTime": csvData[i][1] ?? "",
+        "description": csvData[i][2] ?? "",
+        "alertCount": 0,
+        "brand": csvData[i][4] ?? "",
+        "category": csvData[i][5] ?? "",
+        "code": csvData[i][6] ?? "",
+        "itemName": csvData[i][7] ?? "",
+        "office": csvData[i][8] ?? "",
+        "qty": csvData[i][9] ?? 0,
+        "holder": csvData[i][10] ?? 0,
         "history": [],
       };
-    //  await fireStoreInstance.collection("productList").add(data);
+      //  await fireStoreInstance.collection("productList").add(data);
 
     }
   }
@@ -148,8 +145,8 @@ class ReadCsvViewModel extends GetxController {
     }
   }
 
-  uploadToFireStore() async{
-    for(int i=0;i<mCsvList.length;i++) {
+  uploadToFireStore() async {
+    for (int i = 0; i < mCsvList.length; i++) {
       Map<String, dynamic> data = {
         "add_by": "Arjun",
         "created_time": currentTime,
@@ -167,18 +164,13 @@ class ReadCsvViewModel extends GetxController {
       try {
         await fireStoreInstance.collection("productList").add(data);
         print("suceess");
-
       } on FirebaseException {
         print("fail $i ");
       }
 
       catch (e) {
-
         print("fail $i ");
       }
-
-
-
     }
   }
 }
